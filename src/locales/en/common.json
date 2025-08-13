@@ -1,0 +1,18 @@
+{
+  "header": {
+    "dashboard": {
+      "title": "Home Page",
+      "li1": "Home",
+      "li2": "Clients",
+      "li3": "Products",
+      "li4": "Warehouse",
+      "li5": "Finance",
+      "add-deal": "Create deal"
+    }
+  },
+  "language": {
+    "ru": "Русский",
+    "en": "English",
+    "uz": "O'zbek"
+  }
+}

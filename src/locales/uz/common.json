@@ -1,0 +1,18 @@
+{
+  "header": {
+    "dashboard": {
+      "title": "Bosh sahifa",
+      "li1": "Bosh sahifa",
+      "li2": "Mijozlar",
+      "li3": "Mahsulotlar",
+      "li4": "Ombor",
+      "li5": "Moliya",
+      "add-deal": "Bitim yaratish"
+    }
+  },
+  "language": {
+    "ru": "Русский",
+    "en": "English",
+    "uz": "O'zbek"
+  }
+}
