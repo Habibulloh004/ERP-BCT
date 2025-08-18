@@ -54,7 +54,7 @@ export default function DashboardHeader() {
   }
 
   return (
-    <header className='fixed w-full h-20 bg-primary flex justify-between items-center gap-5 px-4'>
+    <header className='fixed w-full h-20 bg-primary flex justify-between items-center gap-5 px-4 z-[999]'>
       <div className='flex gap-10'>
         <Image className='w-auto h-12' width={100} height={100} src="/logo.png" alt="logo" loading='eager' />
         <nav className='flex justify-between items-center gap-5'>

@@ -7,7 +7,17 @@
       "li3": "Mahsulotlar",
       "li4": "Ombor",
       "li5": "Moliya",
-      "add-deal": "Bitim yaratish"
+      "add-deal": "Shartnoma yaratish"
+    },
+    "menuDialog": {
+      "setting": "Sozlamalar",
+      "settingP": "Profil sozlamalari",
+      "logout": "Chiqish",
+      "notif": "Bildirishnoma",
+      "newOrder": "Yangi buyurtma!",
+      "newOrderSite": "Saytdan yangi buyurtma!",
+      "youSure": "Ishonchingiz komilmi?",
+      "youSureDesc": "Bu amalni bekor qilib bo‘lmaydi. Siz tizimdan chiqarilasiz."
     }
   },
   "login": {
@@ -27,11 +37,11 @@
     },
     "error": {
       "phone": "Login/telefon kiriting",
-      "password": "Eng kamida 6 ta belgi"
+      "password": "Kamida 6 ta belgi"
     },
     "submit": "Kirish",
-    "register": "Ro'yxatdan o'tish",
-    "haveAcc": "Hisobingiz yo‘qmi? "
+    "register": "Ro‘yxatdan o‘tish",
+    "haveAcc": "Hisobingiz yo‘qmi?"
   },
   "resetPassword": {
     "title": "Parolni tiklash",
@@ -48,7 +58,7 @@
       "errors": {
         "phoneRequired": "Telefon raqamini kiriting",
         "otpRequired": "6 xonali kodni kiriting",
-        "passwordMin": "Eng kamida 6 ta belgi",
+        "passwordMin": "Kamida 6 ta belgi",
         "passwordMatch": "Parollar bir xil bo‘lishi kerak"
       },
       "buttons": {
@@ -56,7 +66,7 @@
         "verifyCode": "Tasdiqlash",
         "resetPassword": "Parolni tiklash",
         "resendCode": "Kod qayta yuborish",
-        "resendIn": "Qayta yuborish"
+        "resendIn": "Qayta yuborish vaqti"
       }
     },
     "messages": {
@@ -75,8 +85,8 @@
         "desc": "Buyurtma yaratish"
       },
       "deal": {
-        "title": "Bitim",
-        "desc": "Bitimlarni ko‘rish, qo‘shish va o‘zgartirish"
+        "title": "Shartnoma",
+        "desc": "Shartnomalarni ko‘rish, qo‘shish va tahrirlash"
       },
       "clients": {
         "title": "Mijozlar",
@@ -84,17 +94,19 @@
       },
       "products": {
         "title": "Mahsulotlar",
-        "desc": "Mahsulotlarni ko‘rish, qo‘shish va o‘zgartirish"
+        "desc": "Mahsulotlarni ko‘rish, qo‘shish va tahrirlash"
       },
       "warehouse": {
         "title": "Ombor",
-        "desc": "Qoldiq, kirim va chiqim"
+        "desc": "Qoldiq, kelib tushgan va hisobdan chiqarish"
       }
     }
   },
   "common": {
     "loading": "Yuklanmoqda…",
-    "checkLoad": "Hisob tekshirilmoqda…"
+    "checkLoad": "Hisob tekshirilmoqda…",
+    "logout": "Chiqish",
+    "cancel": "Bekor qilish"
   },
   "language": {
     "ru": "Русский",

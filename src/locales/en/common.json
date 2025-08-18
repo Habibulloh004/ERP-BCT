@@ -1,13 +1,23 @@
 {
   "header": {
     "dashboard": {
-      "title": "EN home page",
+      "title": "EN Home Page",
       "li1": "Home",
       "li2": "Clients",
       "li3": "Products",
       "li4": "Warehouse",
       "li5": "Finance",
-      "add-deal": "Create deal"
+      "add-deal": "Create Deal"
+    },
+    "menuDialog": {
+      "setting": "Settings",
+      "settingP": "Profile Settings",
+      "logout": "Logout",
+      "notif": "Notification",
+      "newOrder": "New Order!",
+      "newOrderSite": "New order from the website!",
+      "youSure": "Are you sure?",
+      "youSureDesc": "This action cannot be undone. You will be logged out."
     }
   },
   "login": {
@@ -31,19 +41,19 @@
     },
     "submit": "Login",
     "register": "Register",
-    "haveAcc": "No account? "
+    "haveAcc": "Don't have an account?"
   },
   "resetPassword": {
-    "title": "Reset password",
+    "title": "Reset Password",
     "phoneStepTitle": "Enter phone number",
     "otpStepTitle": "Enter verification code",
     "newPassStepTitle": "Enter new password",
     "form": {
       "label": {
         "phone": "Phone",
-        "otp": "Verification code",
-        "newPassword": "New password",
-        "confirmPassword": "Confirm password"
+        "otp": "Verification Code",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password"
       },
       "errors": {
         "phoneRequired": "Enter phone number",
@@ -52,22 +62,22 @@
         "passwordMatch": "Passwords must match"
       },
       "buttons": {
-        "sendCode": "Send code",
+        "sendCode": "Send Code",
         "verifyCode": "Verify",
-        "resetPassword": "Reset password",
-        "resendCode": "Resend code",
+        "resetPassword": "Reset Password",
+        "resendCode": "Resend Code",
         "resendIn": "Resend in"
       }
     },
     "messages": {
       "codeSentTo": "Code sent to",
       "invalidOtp": "Invalid verification code",
-      "success": "Password successfully changed"
+      "success": "Password changed successfully"
     }
   },
   "homePage": {
     "page": {
-      "homeTitle": "Home"
+      "homeTitle": "Home Page"
     },
     "menu": {
       "newOrder": {
@@ -76,7 +86,7 @@
       },
       "deal": {
         "title": "Deal",
-        "desc": "View, add, and edit deals"
+        "desc": "View, add and edit deals"
       },
       "clients": {
         "title": "Clients",
@@ -84,17 +94,19 @@
       },
       "products": {
         "title": "Products",
-        "desc": "View, add, and edit products"
+        "desc": "View, add and edit products"
       },
       "warehouse": {
         "title": "Warehouse",
-        "desc": "Stock, arrival, and write-off"
+        "desc": "Stocks, arrivals and write-offs"
       }
     }
   },
   "common": {
     "loading": "Loading…",
-    "checkLoad": "Checking account…"
+    "checkLoad": "Checking account…",
+    "logout": "Logout",
+    "cancel": "Cancel"
   },
   "language": {
     "ru": "Русский",
