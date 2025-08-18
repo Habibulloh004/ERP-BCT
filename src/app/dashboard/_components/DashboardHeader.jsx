@@ -45,10 +45,8 @@ export default function DashboardHeader() {
   // Active link tekshirish funksiyasi
   const isActiveLink = (link) => {
     if (link === "/dashboard") {
-      // Aniq /dashboard sahifasi uchun
       return pathname === "/dashboard";
     } else {
-      // Boshqa sahifalar uchun
       return pathname === link || pathname.startsWith(link + "/");
     }
   }
@@ -57,7 +55,9 @@ export default function DashboardHeader() {
     <header className='fixed w-full h-20 bg-primary flex justify-between items-center gap-5 px-4 z-[999]'>
       <div className='flex gap-10'>
         <Image className='w-auto h-12' width={100} height={100} src="/logo.png" alt="logo" loading='eager' />
-        <nav className='flex justify-between items-center gap-5'>
+        
+        {/* Navigation - faqat xl+ da ko'rsatish */}
+        <nav className='hidden xl:flex justify-between items-center gap-5'>
           {navLinks?.map((nv, idx) => (
             <Link
               key={idx}
@@ -75,16 +75,16 @@ export default function DashboardHeader() {
           ))}
         </nav>
       </div>
+      
       <div className='flex gap-2'>
         <Link href="/dashboard/create-deal" className='px-3 h-12 w-full flex justify-center items-center gap-3 rounded-md bg-secondary hover:ring-ring hover:ring-2 hover:bg-secondary/70 transition-all duration-200 ease-linear text-white'>
           <Image src={"/headIcons/createDeal.svg"} alt={"new"} width={30} height={30} />
-          <h1>{t("header.dashboard.add-deal")}</h1>
+          <h1 className='hidden lg:block'>{t("header.dashboard.add-deal")}</h1>
         </Link>
         <NotificationDialog />
-        <MenuDialog />
+        <MenuDialog navLinks={navLinks} isActiveLink={isActiveLink} />
         <LanguageSwitcher />
       </div>
-
     </header>
   )
 }

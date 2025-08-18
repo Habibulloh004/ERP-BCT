@@ -201,3 +201,75 @@ body {
   /* font-medium */
   color: inherit;
 }
+
+/* globals.css da qo'shish uchun */
+
+/* JavaScript ishlamagan holatda ham himoya */
+@media (max-width: 999px) {
+  body {
+    overflow: hidden;
+  }
+  
+  .desktop-only-site {
+    display: none !important;
+  }
+  
+  .mobile-warning {
+    display: flex !important;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .mobile-warning {
+    display: none !important;
+  }
+  
+  .desktop-only-site {
+    display: block;
+    min-width: 1000px;
+  }
+}
+
+/* CSS-only fallback warning */
+.mobile-warning {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.mobile-warning-content {
+  max-width: 400px;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-warning h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.mobile-warning p {
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.mobile-warning .screen-info {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 1rem;
+  color: #b91c1c;
+  font-size: 0.875rem;
+}

@@ -3,6 +3,7 @@ import "./globals.css";
 import "@/lib/i18n";
 import LanguageProvider from "@/providers/LanguageProvider";
 import NextTopLoader from "nextjs-toploader";
+import ScreenSizeGate from "@/components/shared/ScreenSizeGate";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
             speed={200}
             shadow="0 0 10px #29D, 0 0 5px #29D" // ixtiyoriy soyalar
           />
-          {children}
+          <ScreenSizeGate>
+            {children}
+          </ScreenSizeGate>
         </LanguageProvider>
       </body>
     </html>
