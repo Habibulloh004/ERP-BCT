@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import NotificationDialog from './NotificationDialog'
+import MenuDialog from './MenuDialog'
 
 export default function DashboardHeader() {
   const { t } = useTranslation()
@@ -74,21 +76,15 @@ export default function DashboardHeader() {
         </nav>
       </div>
       <div className='flex gap-2'>
-        <Link href="/dashboard/create-deal" className='flex justify-center items-center gap-3 rounded-md px-3 py-2 bg-secondary hover:ring-ring hover:ring-2 hover:bg-secondary/70 transition-all duration-200 ease-linear text-white'>
+        <Link href="/dashboard/create-deal" className='px-3 h-12 w-full flex justify-center items-center gap-3 rounded-md bg-secondary hover:ring-ring hover:ring-2 hover:bg-secondary/70 transition-all duration-200 ease-linear text-white'>
           <Image src={"/headIcons/createDeal.svg"} alt={"new"} width={30} height={30} />
           <h1>{t("header.dashboard.add-deal")}</h1>
         </Link>
-        <button href="/dashboard/create-deal" className='flex justify-center items-center gap-3 rounded-md px-3 py-2 bg-secondary hover:ring-ring hover:ring-2 hover:bg-secondary/70 transition-all duration-200 ease-linear text-white relative'>
-          <Image src={"/headIcons/notif.svg"} alt={"new"} width={30} height={30} />
-          <div className='-top-1 -right-1 absolute p-2 w-7 h-7 flex justify-center items-center bg-red-400 text-[8px] rounded-full'>
-            new
-          </div>
-        </button>
-        <button href="/dashboard/create-deal" className='flex justify-center items-center gap-3 rounded-md px-3 py-2 bg-secondary hover:ring-ring hover:ring-2 hover:bg-secondary/70 transition-all duration-200 ease-linear text-white'>
-          <Image src={"/headIcons/burger.svg"} alt={"new"} width={30} height={30} />
-        </button>
+        <NotificationDialog />
+        <MenuDialog />
         <LanguageSwitcher />
       </div>
+
     </header>
   )
 }

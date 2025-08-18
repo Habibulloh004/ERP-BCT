@@ -1,13 +1,22 @@
-import React from 'react'
-import DashboardHeader from './_components/DashboardHeader'
+// HECH QAYERGA "use client" YO'Q
+import { cookies } from "next/headers";
+import DashboardHeader from "./_components/DashboardHeader";
+import { AuthProvider } from "@/components/providers/AuthProvider";
+import AuthGate from "@/components/providers/AuthGate";
 
 export default function DashboardLayout({ children }) {
+  const initialUserData = cookies().get("userData")?.value || null;
+
   return (
     <>
       <DashboardHeader />
-      <div className='pt-20'>
-        {children}
-      </div>
+      <AuthProvider initialUserData={initialUserData} cookieName="userData">
+        <div className="pt-20 min-h-[60vh]">
+          <AuthGate>
+            {children}
+          </AuthGate>
+        </div>
+      </AuthProvider>
     </>
-  )
+  );
 }

@@ -173,10 +173,10 @@ const CustomFormField = (props) => {
       render={({ field }) => (
         <FormItem className="flex-1 flex flex-col">
           {props.fieldType !== FormFieldType.CHECKBOX && label && (
-            <FormLabel className={cn("text-white text-sm", labelClass)}>
+            <FormLabel className={cn("text-black text-sm", labelClass)}>
               {label}{" "}
               {optional && (
-                <span className="text-[12px] text-white/50">{optional}</span>
+                <span className="text-[12px] text-black/50">{optional}</span>
               )}
             </FormLabel>
           )}

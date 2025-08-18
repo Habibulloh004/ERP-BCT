@@ -1,7 +1,7 @@
 {
   "header": {
     "dashboard": {
-      "title": "Home Page",
+      "title": "EN home page",
       "li1": "Home",
       "li2": "Clients",
       "li3": "Products",
@@ -9,6 +9,92 @@
       "li5": "Finance",
       "add-deal": "Create deal"
     }
+  },
+  "login": {
+    "title": "Login",
+    "form": {
+      "label": {
+        "phone": "Login",
+        "password": "Password"
+      },
+      "placeholder": {
+        "phone": ""
+      },
+      "fogotPassword": {
+        "title": "Forgot password?",
+        "submit": "Recover"
+      }
+    },
+    "error": {
+      "phone": "Enter login/phone",
+      "password": "Minimum 6 characters"
+    },
+    "submit": "Login",
+    "register": "Register",
+    "haveAcc": "No account? "
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "phoneStepTitle": "Enter phone number",
+    "otpStepTitle": "Enter verification code",
+    "newPassStepTitle": "Enter new password",
+    "form": {
+      "label": {
+        "phone": "Phone",
+        "otp": "Verification code",
+        "newPassword": "New password",
+        "confirmPassword": "Confirm password"
+      },
+      "errors": {
+        "phoneRequired": "Enter phone number",
+        "otpRequired": "Enter 6-digit code",
+        "passwordMin": "Minimum 6 characters",
+        "passwordMatch": "Passwords must match"
+      },
+      "buttons": {
+        "sendCode": "Send code",
+        "verifyCode": "Verify",
+        "resetPassword": "Reset password",
+        "resendCode": "Resend code",
+        "resendIn": "Resend in"
+      }
+    },
+    "messages": {
+      "codeSentTo": "Code sent to",
+      "invalidOtp": "Invalid verification code",
+      "success": "Password successfully changed"
+    }
+  },
+  "homePage": {
+    "page": {
+      "homeTitle": "Home"
+    },
+    "menu": {
+      "newOrder": {
+        "title": "New Order",
+        "desc": "Create an order"
+      },
+      "deal": {
+        "title": "Deal",
+        "desc": "View, add, and edit deals"
+      },
+      "clients": {
+        "title": "Clients",
+        "desc": "Client database"
+      },
+      "products": {
+        "title": "Products",
+        "desc": "View, add, and edit products"
+      },
+      "warehouse": {
+        "title": "Warehouse",
+        "desc": "Stock, arrival, and write-off"
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "checkLoad": "Checking account…"
   },
   "language": {
     "ru": "Русский",

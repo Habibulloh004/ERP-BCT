@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="w-auto relative group">
-      <button className="hover:ring-ring hover:ring-2 duration-200 ease-linear bg-white flex items-center gap-2 px-3 py-2 rounded-lg border h-full border-gray-300 hover:bg-white/90 cursor-pointer transition-colors">
+      <button className="hover:ring-ring hover:ring-2 duration-200 ease-linear bg-white flex items-center gap-2 h-12 w-full px-2 rounded-lg border border-gray-300 hover:bg-white/90 cursor-pointer transition-colors">
         <Globe className="w-4 h-4" />
         <span className="text-sm font-medium">
           {languages.find(lang => lang.code === i18n.language)?.flag || '🌐'}

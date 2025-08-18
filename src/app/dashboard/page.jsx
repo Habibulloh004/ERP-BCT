@@ -1,14 +1,11 @@
-"use client"
-
-import LanguageSwitcher from '@/components/shared/LanguageSwitcher'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
-
+import MenuComponent from './_components/MenuComponent'
+import { ChartAreaInteractive } from './_components/StatisticsComponent'
 export default function HomePage() {
-  const [t] = useTranslation("common")
   return (
-    <div className='flex'>
-    {t("header.dashboard.title")}
+    <div className='flex flex-col gap-5'>
+      <MenuComponent />
+      <ChartAreaInteractive />
     </div>
   )
 }

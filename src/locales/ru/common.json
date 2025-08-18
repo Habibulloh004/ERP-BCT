@@ -1,16 +1,102 @@
 {
-  "header":{
-    "dashboard":{
-      "title":"RU home page",
-      "li1":"Главная страница",
-      "li2":"Клиенты",
-      "li3":"Товары",
-      "li4":"Склад",
-      "li5":"Финансы",
-      "add-deal":"Создать сделку"
+  "header": {
+    "dashboard": {
+      "title": "RU home page",
+      "li1": "Главная страница",
+      "li2": "Клиенты",
+      "li3": "Товары",
+      "li4": "Склад",
+      "li5": "Финансы",
+      "add-deal": "Создать сделку"
     }
   },
-"language": {
+  "login": {
+    "title": "Войти",
+    "form": {
+      "label": {
+        "phone": "Логин",
+        "password": "Пароль"
+      },
+      "placeholder": {
+        "phone": ""
+      },
+      "fogotPassword": {
+        "title": "Забыли пароль?",
+        "submit": "Восстановить"
+      }
+    },
+    "error": {
+      "phone": "Введите логин/телефон",
+      "password": "Минимум 6 символов"
+    },
+    "submit": "Войти",
+    "register": "Регистрация",
+    "haveAcc": "Нет аккаунта? "
+  },
+  "resetPassword": {
+    "title": "Сброс пароля",
+    "phoneStepTitle": "Введите номер телефона",
+    "otpStepTitle": "Введите код подтверждения",
+    "newPassStepTitle": "Введите новый пароль",
+    "form": {
+      "label": {
+        "phone": "Телефон",
+        "otp": "Код подтверждения",
+        "newPassword": "Новый пароль",
+        "confirmPassword": "Подтвердите пароль"
+      },
+      "errors": {
+        "phoneRequired": "Введите номер телефона",
+        "otpRequired": "Введите 6-значный код",
+        "passwordMin": "Минимум 6 символов",
+        "passwordMatch": "Пароли должны совпадать"
+      },
+      "buttons": {
+        "sendCode": "Отправить код",
+        "verifyCode": "Подтвердить",
+        "resetPassword": "Сбросить пароль",
+        "resendCode": "Отправить код снова",
+        "resendIn": "Отправить снова через"
+      }
+    },
+    "messages": {
+      "codeSentTo": "Код отправлен на",
+      "invalidOtp": "Неверный код подтверждения",
+      "success": "Пароль успешно изменён"
+    }
+  },
+  "homePage": {
+    "page": {
+      "homeTitle": "Главная страница"
+    },
+    "menu": {
+      "newOrder": {
+        "title": "Новый заказ",
+        "desc": "Создать заказ"
+      },
+      "deal": {
+        "title": "Сделку",
+        "desc": "Просмотр, добавление и изменения сделок"
+      },
+      "clients": {
+        "title": "Клиенты",
+        "desc": "База клиентов"
+      },
+      "products": {
+        "title": "Товары",
+        "desc": "Просмотр, добавление и изменения товаров"
+      },
+      "warehouse": {
+        "title": "Склад",
+        "desc": "Остатки, приход и списание"
+      }
+    }
+  },
+  "common": {
+    "loading": "Загрузка…",
+    "checkLoad": "Проверка учетной записи…"
+  },
+  "language": {
     "ru": "Русский",
     "en": "English",
     "uz": "O'zbek"

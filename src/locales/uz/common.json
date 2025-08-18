@@ -1,7 +1,7 @@
 {
   "header": {
     "dashboard": {
-      "title": "Bosh sahifa",
+      "title": "UZ bosh sahifa",
       "li1": "Bosh sahifa",
       "li2": "Mijozlar",
       "li3": "Mahsulotlar",
@@ -9,6 +9,92 @@
       "li5": "Moliya",
       "add-deal": "Bitim yaratish"
     }
+  },
+  "login": {
+    "title": "Kirish",
+    "form": {
+      "label": {
+        "phone": "Login",
+        "password": "Parol"
+      },
+      "placeholder": {
+        "phone": ""
+      },
+      "fogotPassword": {
+        "title": "Parolni unutdingizmi?",
+        "submit": "Tiklash"
+      }
+    },
+    "error": {
+      "phone": "Login/telefon kiriting",
+      "password": "Eng kamida 6 ta belgi"
+    },
+    "submit": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "haveAcc": "Hisobingiz yo‘qmi? "
+  },
+  "resetPassword": {
+    "title": "Parolni tiklash",
+    "phoneStepTitle": "Telefon raqamingizni kiriting",
+    "otpStepTitle": "Tasdiqlash kodini kiriting",
+    "newPassStepTitle": "Yangi parolni kiriting",
+    "form": {
+      "label": {
+        "phone": "Telefon",
+        "otp": "Tasdiqlash kodi",
+        "newPassword": "Yangi parol",
+        "confirmPassword": "Parolni tasdiqlang"
+      },
+      "errors": {
+        "phoneRequired": "Telefon raqamini kiriting",
+        "otpRequired": "6 xonali kodni kiriting",
+        "passwordMin": "Eng kamida 6 ta belgi",
+        "passwordMatch": "Parollar bir xil bo‘lishi kerak"
+      },
+      "buttons": {
+        "sendCode": "Kod yuborish",
+        "verifyCode": "Tasdiqlash",
+        "resetPassword": "Parolni tiklash",
+        "resendCode": "Kod qayta yuborish",
+        "resendIn": "Qayta yuborish"
+      }
+    },
+    "messages": {
+      "codeSentTo": "Kod yuborildi:",
+      "invalidOtp": "Noto‘g‘ri tasdiqlash kodi",
+      "success": "Parol muvaffaqiyatli o‘zgartirildi"
+    }
+  },
+  "homePage": {
+    "page": {
+      "homeTitle": "Bosh sahifa"
+    },
+    "menu": {
+      "newOrder": {
+        "title": "Yangi buyurtma",
+        "desc": "Buyurtma yaratish"
+      },
+      "deal": {
+        "title": "Bitim",
+        "desc": "Bitimlarni ko‘rish, qo‘shish va o‘zgartirish"
+      },
+      "clients": {
+        "title": "Mijozlar",
+        "desc": "Mijozlar bazasi"
+      },
+      "products": {
+        "title": "Mahsulotlar",
+        "desc": "Mahsulotlarni ko‘rish, qo‘shish va o‘zgartirish"
+      },
+      "warehouse": {
+        "title": "Ombor",
+        "desc": "Qoldiq, kirim va chiqim"
+      }
+    }
+  },
+  "common": {
+    "loading": "Yuklanmoqda…",
+    "checkLoad": "Hisob tekshirilmoqda…"
   },
   "language": {
     "ru": "Русский",
