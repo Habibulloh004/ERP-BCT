@@ -312,22 +312,22 @@ export function ChartAreaInteractive() {
                   <stop
                     offset="0%"
                     stopColor="var(--white)"
-                    stopOpacity={0.8}
+                    stopOpacity={0}
                   />
                   <stop
                     offset="0%"
                     stopColor="var(--white)"
-                    stopOpacity={0.1}
+                    stopOpacity={0}
                   />
                 </linearGradient>
                 <linearGradient id="fillClient" x1="0" y1="0" x2="0" y2="1">
                   <stop
-                    offset="5%"
+                    offset="10%"
                     stopColor="var(--primary)"
-                    stopOpacity={0.8}
+                    stopOpacity={0.3}
                   />
                   <stop
-                    offset="95%"
+                    offset="90%"
                     stopColor="var(--primary)"
                     stopOpacity={0.1}
                   />

@@ -9,15 +9,15 @@
       "li5": "Финансы",
       "add-deal": "Создать сделку"
     },
-    "menuDialog":{
-      "setting":"Настройки",
-      "settingP":"Настройки профиля",
-      "logout":"Выйти",
-      "notif":"Уведомление",
-      "newOrder":"Новый заказ!",
-      "newOrderSite":"Новый заказ с сайта!",
-      "youSure":"Вы уверены?",
-      "youSureDesc":"Это действие нельзя отменить. Вы будете выведены из системы."
+    "menuDialog": {
+      "setting": "Настройки",
+      "settingP": "Настройки профиля",
+      "logout": "Выйти",
+      "notif": "Уведомление",
+      "newOrder": "Новый заказ!",
+      "newOrderSite": "Новый заказ с сайта!",
+      "youSure": "Вы уверены?",
+      "youSureDesc": "Это действие нельзя отменить. Вы будете выведены из системы."
     }
   },
   "login": {
@@ -102,11 +102,41 @@
       }
     }
   },
+  "clients": {
+    "columns": {
+      "id": "#",
+      "name": "Имя Фамилия",
+      "orders": "Заказы",
+      "phone": "Телефон",
+      "email": "Email",
+      "actions": "",
+      "ordersCount_one": "{{count}} заказ",
+      "ordersCount_few": "{{count}} заказа",
+      "ordersCount_many": "{{count}} заказов",
+      "ordersCount_other": "{{count}} заказов"
+    },
+    "dialog": {
+      "deleteTitle": "Удалить клиента?",
+      "deleteDesc": "Это действие необратимо.",
+      "cancel": "Отмена",
+      "confirm": "Да, удалить"
+    }
+  },
+  "serial": {
+    "columns": {
+      "id": "#",
+      "name": "Название",
+      "serial_number": "Серийный номер",
+      "date_create": "Дата покупки",
+      "date_warranty": "Гарантия истекает",
+      "price": "Сумма"
+    }
+  },
   "common": {
     "loading": "Загрузка…",
     "checkLoad": "Проверка учетной записи…",
-    "logout":"Выйти",
-    "cancel":"Отмена"
+    "logout": "Выйти",
+    "cancel": "Отмена"
   },
   "language": {
     "ru": "Русский",

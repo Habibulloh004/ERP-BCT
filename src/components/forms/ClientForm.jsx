@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -23,19 +23,29 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { DataTable } from '../shared/DataTable'
+import { getSerialColumns } from '@/lib/columns'
+import { serialData } from '@/lib/data'
+import { toastError, toastLoading, toastSuccess } from '@/lib/toast'
+import { useTranslation } from 'react-i18next'
 
 // Validation schema
-const ClientValidation = z.object({
+
+export default function ClientForm({ type, data = null, clientId = null }) {
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const { t } = useTranslation();
+
+  const ClientValidation = z.object({
   name: z.string().min(2, "Имя обязательно для заполнения").trim(),
   phone: z.string().min(9, "Некорректный номер телефона").trim(),
   email: z.string().email("Некорректный email адрес").trim(),
   orders: z.number().min(0, "Количество заказов не может быть отрицательным"),
 })
 
-export default function ClientForm({ type, data = null, clientId = null }) {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
+
+  const columns = useMemo(() => getSerialColumns(t), [t]);
 
   // Form setup
   const form = useForm({
@@ -57,7 +67,7 @@ export default function ClientForm({ type, data = null, clientId = null }) {
   // Page titles
   const getPageTitle = () => {
     switch (type) {
-      case 'add': return 'Добавить клиента'
+      case 'add': return 'Новый клиент'
       case 'edit': return 'Азиз'
       case 'show': return 'Азиз'
       default: return 'Клиент'
@@ -65,7 +75,13 @@ export default function ClientForm({ type, data = null, clientId = null }) {
   }
 
   // Submit handler
+
   const onSubmit = async (values) => {
+    const id = toastLoading({
+      title: "Сохранение...",
+      description: "Пожалуйста, подождите"
+    });
+
     if (isReadonly) return
 
     setIsLoading(true)
@@ -79,7 +95,12 @@ export default function ClientForm({ type, data = null, clientId = null }) {
         //   headers: { 'Content-Type': 'application/json' },
         //   body: JSON.stringify(values)
         // })
-        toast.success('Клиент успешно добавлен!')
+        await new Promise((r) => setTimeout(r, 1500));
+        toast.dismiss(id);
+        toastSuccess({
+          title: "Успех!",
+          description: "Новая запись успешно добавлена!"
+        });
       } else if (isEdit) {
         // API call for edit
         // const response = await fetch(`/api/clients/${clientId}`, {
@@ -87,10 +108,12 @@ export default function ClientForm({ type, data = null, clientId = null }) {
         //   headers: { 'Content-Type': 'application/json' },
         //   body: JSON.stringify(values)
         // })
-        toast.success('Клиент успешно обновлен!')
+        toast.dismiss(id);
+        toastError({
+          title: "Ошибка",
+          description: "Не удалось сохранить изменения"
+        });
       }
-
-      // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000))
 
       router.push('/dashboard/clients')
@@ -199,10 +222,11 @@ export default function ClientForm({ type, data = null, clientId = null }) {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="name"
-              label="Имя Фамилия *"
+              label="Имя Фамилия"
               placeholder="Введите имя и фамилию"
               disabled={isReadonly}
-              inputClass={`h-11 rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
+              required={true}
+              inputClass={`h-11 text-black rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
             />
 
             {/* Телефон */}
@@ -210,10 +234,11 @@ export default function ClientForm({ type, data = null, clientId = null }) {
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="phone"
-              label="Номер телефона *"
+              label="Номер телефона"
               placeholder="+998 99 999-99-99"
               disabled={isReadonly}
-              inputClass={`rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
+              required={true}
+              inputClass={`text-black rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
             />
 
             {/* Email */}
@@ -221,10 +246,11 @@ export default function ClientForm({ type, data = null, clientId = null }) {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="email"
-              label="Email *"
+              label="Email"
               placeholder="example@gmail.com"
               disabled={isReadonly}
-              inputClass={`h-11 rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
+              required={true}
+              inputClass={`h-11 text-black rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
             />
           </div>
 
@@ -232,7 +258,7 @@ export default function ClientForm({ type, data = null, clientId = null }) {
           {isReadonly && data && (
             <div className="border-t pt-6 mt-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">История покупок</h3>
-             data table her
+              <DataTable columns={columns} allData={serialData} />
             </div>
           )}
 

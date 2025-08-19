@@ -77,7 +77,7 @@ export default function DashboardHeader() {
       </div>
       
       <div className='flex gap-2'>
-        <Link href="/dashboard/create-deal" className='px-3 h-12 w-full flex justify-center items-center gap-3 rounded-md bg-secondary hover:ring-ring hover:ring-2 hover:bg-secondary/70 transition-all duration-200 ease-linear text-white'>
+        <Link href="/dashboard/deals/add" className='px-3 h-12 w-full flex justify-center items-center gap-3 rounded-md bg-secondary hover:ring-ring hover:ring-2 hover:bg-secondary/70 transition-all duration-200 ease-linear text-white'>
           <Image src={"/headIcons/createDeal.svg"} alt={"new"} width={30} height={30} />
           <h1 className='hidden lg:block'>{t("header.dashboard.add-deal")}</h1>
         </Link>

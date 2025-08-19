@@ -1,14 +1,19 @@
 "use client"
 
 import { DataTable } from '@/components/shared/DataTable'
-import { clientsColumns } from '@/lib/columns'
+import { getClientsColumns } from '@/lib/columns'
 import { clients } from '@/lib/data'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 export default function ClientsPage() {
+  const { t } = useTranslation();
+
+  const columns = useMemo(() => getClientsColumns(t), [t]);
+
   return (
     <div className="w-11/12 mx-auto py-6">
       {/* Header */}
@@ -24,7 +29,7 @@ export default function ClientsPage() {
 
       {/* DataTable o'zi hamma narsani boshqaradi */}
       <DataTable
-        columns={clientsColumns}
+        columns={columns}
         allData={clients}
         defaultItemsPerPage={10}
       />

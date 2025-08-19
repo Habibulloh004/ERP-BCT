@@ -106,8 +106,8 @@ const MultiSelectField = ({ field, props }) => {
       )}
 
       {/* Dropdown */}
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
+      <Popover className="w-full" open={open} onOpenChange={setOpen}>
+        <PopoverTrigger className="w-full" asChild>
           <Button
             variant="outline"
             role="combobox"
@@ -126,7 +126,7 @@ const MultiSelectField = ({ field, props }) => {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
-          <Command>
+          <Command className={"w-full"}>
             <CommandInput placeholder="Поиск..." />
             <CommandEmpty>Ничего не найдено.</CommandEmpty>
             <CommandGroup className="max-h-64 overflow-auto">
@@ -151,21 +151,6 @@ const MultiSelectField = ({ field, props }) => {
     </div>
   )
 }
-// Exaple MultiSelect
-
-// <CustomFormField
-//   fieldType={FormFieldType.MULTI_SELECT}
-//   control={form.control}
-//   name="skills"
-//   label="Ko'nikmalar"
-//   placeholder="Ko'nikmalarni tanlang..."
-//   options={[
-//     { value: "js", label: "JavaScript" },
-//     { value: "react", label: "React" },
-//     { value: "node", label: "Node.js" }
-//   ]}
-//   required={true}
-// />
 
 const RenderInput = ({ field, className, props, rules }) => {
   const [showPassword, setShowPassword] = React.useState(false)
@@ -296,7 +281,7 @@ const RenderInput = ({ field, className, props, rules }) => {
             <FormControl>
               <SelectTrigger
                 className={cn(
-                  "shad-select-trigger border-b-2 border-border",
+                  "h-12 shad-select-trigger border-b-2 border-border",
                   props.className,
                   className
                 )}
@@ -396,6 +381,9 @@ const CustomFormField = (props) => {
           {props.fieldType !== FormFieldType.CHECKBOX && label && (
             <FormLabel className={cn("text-black text-sm", labelClass)}>
               {label}
+              {required && (
+                <span className="text-red-500 mr-1">*</span>
+              )}
               {optional && (
                 <span className="text-[12px] text-black/50 ml-1">({optional})</span>
               )}
@@ -417,3 +405,115 @@ const CustomFormField = (props) => {
 }
 
 export default CustomFormField
+
+// <Form {...form}>
+//   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+
+//     {/* INPUT */}
+//     <CustomFormField
+//       fieldType={FormFieldType.INPUT}
+//       control={form.control}
+//       name="name"
+//       label="Ism"
+//       placeholder="Ismingizni kiriting"
+//       required
+//     />
+
+//     {/* NUMBER */}
+//     <CustomFormField
+//       fieldType={FormFieldType.NUMBER}
+//       control={form.control}
+//       name="age"
+//       label="Yosh"
+//       placeholder="Yoshingizni kiriting"
+//     />
+
+//     {/* PASSWORD */}
+//     <CustomFormField
+//       fieldType={FormFieldType.PASSWORDINPUT}
+//       control={form.control}
+//       name="password"
+//       label="Parol"
+//       placeholder="Parolni kiriting"
+//       required
+//     />
+
+//     {/* TEXTAREA */}
+//     <CustomFormField
+//       fieldType={FormFieldType.TEXTAREA}
+//       control={form.control}
+//       name="bio"
+//       label="Biografiya"
+//       placeholder="O'zingiz haqingizda qisqa yozing"
+//       rows={4}
+//     />
+
+//     {/* PHONE INPUT */}
+//     <CustomFormField
+//       fieldType={FormFieldType.PHONE_INPUT}
+//       control={form.control}
+//       name="phone"
+//       label="Telefon raqam"
+//       placeholder="+998 ** *** ** **"
+//     />
+
+//     {/* CHECKBOX */}
+//     <CustomFormField
+//       fieldType={FormFieldType.CHECKBOX}
+//       control={form.control}
+//       name="agree"
+//       label="Shartlarga roziman"
+//     />
+
+//     {/* DATE PICKER */}
+//     <CustomFormField
+//       fieldType={FormFieldType.DATE_PICKER}
+//       control={form.control}
+//       name="birth_date"
+//       label="Tug‘ilgan sana"
+//     />
+
+//     {/* SELECT */}
+//     <CustomFormField
+//       fieldType={FormFieldType.SELECT}
+//       control={form.control}
+//       name="payment_method"
+//       label="To‘lov usuli"
+//       placeholder="Tanlang..."
+//     >
+//       <SelectItem value="card">💳 Karta</SelectItem>
+//       <SelectItem value="cash">💵 Naqd</SelectItem>
+//       <SelectItem value="click">📱 Click</SelectItem>
+//       <SelectItem value="payme">💸 Payme</SelectItem>
+//     </CustomFormField>
+
+//     {/* MULTI SELECT */}
+//     <CustomFormField
+//       fieldType={FormFieldType.MULTI_SELECT}
+//       control={form.control}
+//       name="hobbies"
+//       label="Qiziqishlar"
+//       placeholder="Bir nechta tanlang..."
+//       options={[
+//         { value: "coding", label: "👨‍💻 Dasturlash" },
+//         { value: "music", label: "🎵 Musiqa" },
+//         { value: "sport", label: "⚽ Sport" },
+//         { value: "reading", label: "📚 Kitob o‘qish" },
+//       ]}
+//     />
+
+//     {/* RADIO */}
+//     <CustomFormField
+//       fieldType={FormFieldType.RADIO}
+//       control={form.control}
+//       name="gender"
+//       label="Jins"
+//       options={[
+//         { value: "male", label: "👨 Erkak" },
+//         { value: "female", label: "👩 Ayol" },
+//       ]}
+//     />
+
+//     <Button type="submit" className="mt-4">Yuborish</Button>
+//   </form>
+// </Form>

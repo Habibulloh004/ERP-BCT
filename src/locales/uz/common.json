@@ -102,6 +102,36 @@
       }
     }
   },
+  "clients": {
+    "columns": {
+      "id": "#",
+      "name": "Ism Familiya",
+      "orders": "Buyurtmalar",
+      "phone": "Telefon",
+      "email": "Email",
+      "actions": "",
+      "ordersCount_one": "{{count}} ta buyurtma",
+      "ordersCount_few": "{{count}} ta buyurtma",
+      "ordersCount_many": "{{count}} ta buyurtma",
+      "ordersCount_other": "{{count}} ta buyurtma"
+    },
+    "dialog": {
+      "deleteTitle": "Mijozni o‘chirishni tasdiqlaysizmi?",
+      "deleteDesc": "Ushbu amalni qayta tiklab bo‘lmaydi.",
+      "cancel": "Bekor qilish",
+      "confirm": "Ha, o‘chirish"
+    }
+  },
+  "serial": {
+    "columns": {
+      "id": "#",
+      "name": "Nomi",
+      "serial_number": "Seriya raqami",
+      "date_create": "Sotib olingan sana",
+      "date_warranty": "Kafolat tugash sanasi",
+      "price": "Summasi"
+    }
+  },
   "common": {
     "loading": "Yuklanmoqda…",
     "checkLoad": "Hisob tekshirilmoqda…",

@@ -102,6 +102,36 @@
       }
     }
   },
+  "clients": {
+    "columns": {
+      "id": "#",
+      "name": "Full name",
+      "orders": "Orders",
+      "phone": "Phone",
+      "email": "Email",
+      "actions": "",
+      "ordersCount_one": "{{count}} order",
+      "ordersCount_few": "{{count}} orders",
+      "ordersCount_many": "{{count}} orders",
+      "ordersCount_other": "{{count}} orders"
+    },
+    "dialog": {
+      "deleteTitle": "Delete client?",
+      "deleteDesc": "This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Yes, delete"
+    }
+  },
+  "serial": {
+    "columns": {
+      "id": "#",
+      "name": "Name",
+      "serial_number": "Serial number",
+      "date_create": "Purchase date",
+      "date_warranty": "Warranty expires",
+      "price": "Amount"
+    }
+  },
   "common": {
     "loading": "Loading…",
     "checkLoad": "Checking account…",

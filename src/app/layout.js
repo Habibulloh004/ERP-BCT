@@ -4,6 +4,7 @@ import "@/lib/i18n";
 import LanguageProvider from "@/providers/LanguageProvider";
 import NextTopLoader from "nextjs-toploader";
 import ScreenSizeGate from "@/components/shared/ScreenSizeGate";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
             shadow="0 0 10px #29D, 0 0 5px #29D" // ixtiyoriy soyalar
           />
           <ScreenSizeGate>
+            <Toaster expand={true} position="top-center" richColors/>
             {children}
           </ScreenSizeGate>
         </LanguageProvider>
