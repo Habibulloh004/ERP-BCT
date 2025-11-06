@@ -4,9 +4,12 @@
       "title": "UZ bosh sahifa",
       "li1": "Bosh sahifa",
       "li2": "Mijozlar",
+      "liGroup": "Hamkorlar",
       "li3": "Mahsulotlar",
       "li4": "Ombor",
-      "li5": "Moliya",
+      "li5": "Shartnomalar",
+      "li6": "Kompaniyalar",
+      "li7": "Kontragentlar",
       "add-deal": "Shartnoma yaratish"
     },
     "menuDialog": {
@@ -19,6 +22,30 @@
       "youSure": "Ishonchingiz komilmi?",
       "youSureDesc": "Bu amalni bekor qilib bo‘lmaydi. Siz tizimdan chiqarilasiz."
     }
+  },
+  "dealProduct": {
+    "fields": {
+      "product": "Mahsulot*",
+      "serialNumber": "Seriya raqami*",
+      "guarantee": "Kafolat*",
+      "comment": "Izohlar",
+      "quantity": "Miqdor*"
+    },
+    "placeholders": {
+      "serialNumber": "Seriya raqamini kiriting",
+      "guarantee": "Kafolat shartlarini kiriting",
+      "comment": "Izohlar"
+    },
+    "actions": {
+      "add": "Qo‘shish",
+      "cancel": "Bekor qilish",
+      "reset": "Tiklash"
+    },
+    "inStock": "Omborda: {{count}} dona",
+    "stockCount": "Omborda: {{count}} dona",
+    "stockUnknown": "Mavjudligini menejerdan aniqlang",
+    "noImage": "Rasm yo‘q",
+    "scanHint": "Shtrix-kodni skanerlang"
   },
   "login": {
     "title": "Kirish",
@@ -41,7 +68,13 @@
     },
     "submit": "Kirish",
     "register": "Ro‘yxatdan o‘tish",
-    "haveAcc": "Hisobingiz yo‘qmi?"
+    "haveAcc": "Hisobingiz yo‘qmi?",
+    "loadingTitle": "Kirish jarayoni...",
+    "loadingDescription": "Maʼlumotlaringiz tekshirilmoqda",
+    "successTitle": "Xush kelibsiz!",
+    "successDescription": "Siz tizimga muvaffaqiyatli kirdingiz.",
+    "errorTitle": "Kirish amalga oshmadi",
+    "errorDescription": "Login va parolni tekshiring."
   },
   "resetPassword": {
     "title": "Parolni tiklash",
@@ -75,6 +108,40 @@
       "success": "Parol muvaffaqiyatli o‘zgartirildi"
     }
   },
+  "adminProfile": {
+    "title": "Administrator profili",
+    "loginRequiredTitle": "Avtorizatsiya kerak",
+    "loginRequiredDescription": "Administrator maʼlumotlarini boshqarish uchun avval tizimga kiring.",
+    "updatingTitle": "O‘zgartirishlar saqlanmoqda...",
+    "updatingDescription": "Administrator login va paroli yangilanmoqda.",
+    "successTitle": "Maʼlumotlar yangilandi",
+    "successDescription": "Administratorning login va paroli muvaffaqiyatli yangilandi.",
+    "errorTitle": "Yangilash amalga oshmadi",
+    "errorDescription": "Qaytadan urinib ko‘ring yoki ishlab chiquvchiga murojaat qiling.",
+    "loadErrorTitle": "Profilni yuklab bo‘lmadi",
+    "loadErrorDescription": "Sahifani yangilab ko‘ring.",
+    "authRequiredTitle": "Avval tizimga kiring",
+    "authRequiredDescription": "Administrator maʼlumotlarini o‘zgartirish uchun tizimga kirish kerak.",
+    "fields": {
+      "login": "Login",
+      "password": "Yangi parol",
+      "confirmPassword": "Parolni tasdiqlang"
+    },
+    "placeholders": {
+      "login": "admin",
+      "password": "Yangi parolni kiriting",
+      "confirmPassword": "Parolni qayta kiriting"
+    },
+    "errors": {
+      "name": "Login kamida 3 ta belgidan iborat bo‘lishi kerak",
+      "password": "Parol kamida 6 ta belgidan iborat bo‘lishi kerak",
+      "passwordMatch": "Parollar bir xil bo‘lishi kerak"
+    },
+    "actions": {
+      "save": "O‘zgarishlarni saqlash",
+      "reset": "Bekor qilish"
+    }
+  },
   "homePage": {
     "page": {
       "homeTitle": "Bosh sahifa"
@@ -101,6 +168,307 @@
         "desc": "Qoldiq, kelib tushgan va hisobdan chiqarish"
       }
     }
+  },
+  "dealCategories": {
+    "title": "Kategoriyani tanlang",
+    "subtitle": "Avvalo, kelishuv uchun mavjud mahsulotlarni ko‘rish uchun kategoriyani tanlang.",
+    "empty": "Kategoriyalar topilmadi. Ularni «Mahsulotlar» bo‘limida qo‘shing.",
+    "select": "Tanlash",
+    "noImage": "Rasm yo‘q",
+    "fallbackName": "Kategoriya {{index}}"
+  },
+  "dealProducts": {
+    "subtitle": "Kelishuvga qo‘shish uchun mahsulotni tanlang.",
+    "back": "Kategoriyalarga qaytish",
+    "empty": "Bu kategoriyada mahsulotlar topilmadi.",
+    "noImage": "Rasm yo‘q",
+    "noDescription": "Tavsif ko‘rsatilmagan",
+    "inStock": "Omborda: {{count}} dona",
+    "stockUnknown": "Mavjudligini menejerdan so‘rang",
+    "fallbackName": "Mahsulot {{index}}",
+    "fallbackCategory": "Kategoriya"
+  },
+  "dealForm": {
+    "title": "Bitim tafsilotlari",
+    "fields": {
+      "client": {
+        "label": "Mijoz",
+        "placeholder": "Mijozni tanlang"
+      },
+      "counterparty": {
+        "label": "Kontragent",
+        "placeholder": "Kontragentni tanlang"
+      },
+      "company": {
+        "label": "Kompaniya",
+        "placeholder": "Kompaniyani tanlang"
+      },
+      "contractNumber": {
+        "label": "Shartnoma raqami",
+        "placeholder": "№3251"
+      },
+      "plannedShipmentDate": {
+        "label": "Jo‘natish sanasi"
+      },
+      "dealAmount": {
+        "label": "Bitim summasi",
+        "placeholder": "0.00"
+      },
+      "funnel": {
+        "label": "Vоронка ustuni",
+        "placeholder": "Ustunni tanlang"
+      },
+      "currency": {
+        "label": "Valyuta",
+        "placeholder": "Valyutani tanlang"
+      },
+      "payCard": {
+        "label": "Karta orqali to‘lov",
+        "placeholder": "0.00"
+      },
+      "payCash": {
+        "label": "Naqd to‘lov",
+        "placeholder": "0.00"
+      },
+      "comments": {
+        "label": "Izohlar",
+        "placeholder": "Izohlarni kiriting..."
+      },
+      "guarantee": {
+        "label": "Kafolat",
+        "placeholder": "Kafolat shartlarini kiriting"
+      }
+    },
+    "buttons": {
+      "saving": "Saqlanmoqda...",
+      "submit": "Saqlash",
+      "cancel": "Bekor qilish"
+    }
+  },
+  "dealTable": {
+    "headers": {
+      "serial": "Seriya №",
+      "name": "Nom",
+      "quantity": "Soni",
+      "price": "Narx",
+      "vat": "QQS",
+      "discount": "Chegirma",
+      "total": "Jami"
+    },
+    "empty": "Hozircha mahsulotlar qo‘shilmagan. Bitimga mahsulot qo‘shish uchun pastdagi tugmalardan foydalaning.",
+    "values": {
+      "percent": "{{value}}%"
+    },
+    "summary": {
+      "items": "Mahsulotlar: {{count}}",
+      "subtotal": "Oraliq jami: {{amount}}",
+      "vat": "QQS: {{amount}}",
+      "discount": "Chegirma: {{amount}}"
+    }
+  },
+  "dealAdd": {
+    "errors": {
+      "notFound": "Bitim topilmadi.",
+      "load": {
+        "title": "Bitimni yuklab bo‘lmadi",
+        "description": "Bitim ma’lumotlarini olishning imkoni bo‘lmadi."
+      }
+    },
+    "title": {
+      "create": "Bitim yaratish",
+      "edit": "Bitimni tahrirlash"
+    },
+    "description": {
+      "create": "Bitim ma’lumotlarini to‘ldiring va mahsulotlarni qo‘shing.",
+      "edit": "Bitim tafsilotlarini yangilab, o‘zgarishlarni saqlang."
+    },
+    "defaults": {
+      "draft": "Qoralama"
+    },
+    "status": {
+      "inProgress": "Jarayonda",
+      "draft": "Qoralama",
+      "creating": "Yaratilmoqda"
+    },
+    "payment": {
+      "partial": "Qisman to‘langan",
+      "unpaid": "To‘lanmagan"
+    },
+    "buttons": {
+      "create": "Yaratish",
+      "save": "Saqlash",
+      "cancel": "Bekor qilish",
+      "reset": "Tozalash",
+      "deleting": "O‘chirilmoqda...",
+      "deleteDeal": "Bitimni o‘chirish"
+    },
+    "toasts": {
+      "required": {
+        "title": "Majburiy maydonlarni to‘ldiring",
+        "description": "Mijoz, kontragent va kompaniyani tanlang."
+      },
+      "noProducts": {
+        "title": "Mahsulot qo‘shing",
+        "description": "Bitimni saqlashdan oldin kamida bitta mahsulot kiriting."
+      },
+      "updateSuccess": {
+        "title": "Bitim yangilandi",
+        "description": "Shartnoma {{number}} muvaffaqiyatli yangilandi."
+      },
+      "createSuccess": {
+        "title": "Bitim yaratildi",
+        "description": "Shartnoma {{number}} muvaffaqiyatli yaratildi."
+      },
+      "saveError": {
+        "title": "Saqlash muvaffaqiyatsiz",
+        "description": "Yana urinib ko‘ring yoki administratorga murojaat qiling."
+      },
+      "deleteSuccess": {
+        "title": "Bitim o‘chirildi"
+      },
+      "deleteError": {
+        "title": "Bitimni o‘chirib bo‘lmadi",
+        "description": "Iltimos, birozdan so‘ng yana urinib ko‘ring."
+      },
+      "reset": {
+        "title": "Forma tozalandi",
+        "description": "Bitim qoralamasi qayta tiklandi."
+      }
+    },
+    "actions": {
+      "printSoon": {
+        "title": "Chop etish tez orada",
+        "description": "Bosma hujjatlar ustida ishlayapmiz."
+      },
+      "documents": {
+        "title": "Hujjatlar hali tayyor emas",
+        "description": "Hujjat yuklash keyingi yangilanishda paydo bo‘ladi."
+      },
+      "tax": {
+        "title": "Soliq kalkulyatori mavjud emas",
+        "description": "Soliq hisoblash keyinroq qo‘shiladi."
+      }
+    },
+    "products": {
+      "heading": "Bitim mahsulotlari",
+      "add": "Mahsulot qo‘shish",
+      "scan": "Shtrix-kodni skanerlash"
+    },
+    "dialog": {
+      "delete": {
+        "title": "Bitimni o‘chirish?",
+        "description": "Bu amalni ortga qaytarib bo‘lmaydi."
+      },
+      "cancel": "Bekor qilish",
+      "confirm": "O‘chirish"
+    }
+  },
+  "funnelPage": {
+    "fallbackName": "Ustun {{index}}",
+    "title": "Savdo vоронkasi",
+    "addButton": "Ustun qo‘shish",
+    "emptyState": "Vоронка ustunlari mavjud emas. Bitimlarni tartibga solish uchun yangi ustun yarating.",
+    "tableHeaders": {
+      "order": "Tartib",
+      "name": "Nom",
+      "color": "Rang",
+      "comment": "Izoh",
+      "number": "№",
+      "actions": "Harakatlar"
+    },
+    "colorPreview": "Ustun rangi",
+    "actions": {
+      "save": "Saqlash",
+      "cancel": "Bekor qilish",
+      "edit": "Tahrirlash",
+      "delete": "O‘chirish"
+    },
+    "savingOrder": "Ustunlar tartibi saqlanmoqda...",
+    "noComment": "Izoh yo‘q",
+    "toasts": {
+      "orderError": {
+        "title": "Tartibni saqlab bo‘lmadi",
+        "description": "Sahifani yangilab, yana urinib ko‘ring."
+      },
+      "invalidOrder": {
+        "title": "Noto‘g‘ri raqam",
+        "description": "Noldan katta son kiriting."
+      },
+      "nameRequired": {
+        "title": "Nom talab etiladi",
+        "description": "Ustun nomi bo‘sh bo‘lishi mumkin emas."
+      },
+      "updateSuccess": {
+        "title": "Ustun yangilandi"
+      },
+      "updateError": {
+        "title": "Ustunni yangilab bo‘lmadi",
+        "description": "Iltimos, birozdan so‘ng yana urinib ko‘ring."
+      },
+      "deleteBlocked": {
+        "title": "Ustunni o‘chirib bo‘lmaydi",
+        "description": "Ustunda bitimlar mavjud. O‘chirishdan oldin ularni ko‘chiring."
+      },
+      "deleteSuccess": {
+        "title": "Ustun o‘chirildi"
+      },
+      "deleteError": {
+        "title": "Ustunni o‘chirib bo‘lmadi",
+        "description": "Iltimos, birozdan so‘ng yana urinib ko‘ring."
+      }
+    }
+  },
+  "funnelAdd": {
+    "validation": {
+      "name": "Nomini kamida 2 ta belgidan kiriting.",
+      "color": "HEX formatidagi rangni kiriting.",
+      "order": "Ko‘rinish tartibini kiriting.",
+      "orderMin": "Minimal qiymat — 0."
+    },
+    "toasts": {
+      "success": "Ustun yaratildi",
+      "error": {
+        "title": "Ustunni yaratib bo‘lmadi",
+        "description": "Iltimos, birozdan so‘ng yana urinib ko‘ring."
+      }
+    },
+    "buttons": {
+      "back": "Orqaga",
+      "saving": "Saqlanmoqda...",
+      "submit": "Ustun yaratish",
+      "cancel": "Bekor qilish"
+    },
+    "title": "Yangi vоронka ustuni",
+    "sectionTitle": "Ustun sozlamalari",
+    "fields": {
+      "name": "Nom",
+      "color": "Rang",
+      "order": "Tartib",
+      "comment": "Izoh"
+    },
+    "placeholders": {
+      "name": "Masalan, Yangi lead",
+      "color": "#5B6FDD",
+      "order": "0",
+      "comment": "Bu ustundan qanday foydalanishni yozing"
+    },
+    "colorPicker": "Rangni tanlash"
+  },
+  "dealPage": {
+    "loadErrorTitle": "Bitimlarni yuklab bo‘lmadi",
+    "searchPlaceholder": "Qidirish",
+    "openSettings": "Vоронkani sozlash",
+    "newDeal": "Yangi bitim",
+    "addDealButton": "Bitim qo‘shish",
+    "emptyColumnHint": "Bitimlarni ushbu ustunga sudrab keling",
+    "updating": "Yangilanmoqda...",
+    "unassignedFooter": "Bosqichsiz · bitimni воронkadan chiqarish uchun bu yerga sudrab keling",
+    "noFunnelsHint": "Vоронkalar topilmadi. Sozlamalar tugmasi orqali birinchisini qo‘shing.",
+    "unassignedColumn": "Bosqichsiz",
+    "columnSummary": "{{dealCount}} · {{total}}$",
+    "dealCount_one": "{{count}} ta bitim",
+    "dealCount_other": "{{count}} ta bitim",
+    "defaultDealName": "Bitim"
   },
   "clients": {
     "columns": {
@@ -130,6 +498,24 @@
       "date_create": "Sotib olingan sana",
       "date_warranty": "Kafolat tugash sanasi",
       "price": "Summasi"
+    }
+  },
+  "products": {
+    "columns": {
+      "id": "#",
+      "image": "Rasm",
+      "name": "Nomi",
+      "category": "Kategoriya",
+      "warranty": "Kafolat",
+      "price": "Narxi",
+      "createdAt": "Yaratilgan",
+      "actions": ""
+    },
+    "dialog": {
+      "deleteTitle": "Mahsulotni o'chirish?",
+      "deleteDesc": "Ushbu amalni qayta tiklab bo'lmaydi.",
+      "cancel": "Bekor qilish",
+      "confirm": "Ha, o'chirish"
     }
   },
   "common": {

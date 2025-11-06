@@ -4,8 +4,9 @@ import DashboardHeader from "./_components/DashboardHeader";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import AuthGate from "@/components/providers/AuthGate";
 
-export default function DashboardLayout({ children }) {
-  const initialUserData = cookies().get("userData")?.value || null;
+export default async function DashboardLayout({ children }) {
+  const cookieStore = await cookies();
+  const initialUserData = cookieStore.get("userData")?.value || null;
 
   return (
     <>

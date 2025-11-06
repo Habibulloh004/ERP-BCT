@@ -4,9 +4,12 @@
       "title": "EN Home Page",
       "li1": "Home",
       "li2": "Clients",
+      "liGroup": "Contacts",
       "li3": "Products",
       "li4": "Warehouse",
-      "li5": "Finance",
+      "li5": "Deals",
+      "li6": "Companies",
+      "li7": "Counterparties",
       "add-deal": "Create Deal"
     },
     "menuDialog": {
@@ -19,6 +22,30 @@
       "youSure": "Are you sure?",
       "youSureDesc": "This action cannot be undone. You will be logged out."
     }
+  },
+  "dealProduct": {
+    "fields": {
+      "product": "Product*",
+      "serialNumber": "Serial number*",
+      "guarantee": "Warranty*",
+      "comment": "Comments",
+      "quantity": "Quantity*"
+    },
+    "placeholders": {
+      "serialNumber": "Enter serial number",
+      "guarantee": "Specify warranty terms",
+      "comment": "Comments"
+    },
+    "actions": {
+      "add": "Add",
+      "cancel": "Cancel",
+      "reset": "Reset"
+    },
+    "inStock": "{{count}} items in stock",
+    "stockCount": "In stock: {{count}} pcs",
+    "stockUnknown": "Check availability with the manager",
+    "noImage": "No image",
+    "scanHint": "Scan the barcode"
   },
   "login": {
     "title": "Login",
@@ -41,7 +68,13 @@
     },
     "submit": "Login",
     "register": "Register",
-    "haveAcc": "Don't have an account?"
+    "haveAcc": "Don't have an account?",
+    "loadingTitle": "Signing in...",
+    "loadingDescription": "Validating your credentials",
+    "successTitle": "Welcome!",
+    "successDescription": "You have successfully signed in.",
+    "errorTitle": "Sign-in failed",
+    "errorDescription": "Please check your username and password."
   },
   "resetPassword": {
     "title": "Reset Password",
@@ -75,6 +108,40 @@
       "success": "Password changed successfully"
     }
   },
+  "adminProfile": {
+    "title": "Admin Profile",
+    "loginRequiredTitle": "Authentication Required",
+    "loginRequiredDescription": "Please sign in using the login dialog to manage the administrator credentials.",
+    "updatingTitle": "Saving changes...",
+    "updatingDescription": "Updating administrator credentials.",
+    "successTitle": "Profile updated",
+    "successDescription": "Administrator login and password were updated successfully.",
+    "errorTitle": "Update failed",
+    "errorDescription": "Try again or contact support.",
+    "loadErrorTitle": "Unable to load profile",
+    "loadErrorDescription": "Try refreshing the page.",
+    "authRequiredTitle": "Sign in first",
+    "authRequiredDescription": "You must be logged in to update administrator credentials.",
+    "fields": {
+      "login": "Login",
+      "password": "New password",
+      "confirmPassword": "Confirm password"
+    },
+    "placeholders": {
+      "login": "admin",
+      "password": "Enter new password",
+      "confirmPassword": "Repeat password"
+    },
+    "errors": {
+      "name": "Login must be at least 3 characters",
+      "password": "Password must contain at least 6 characters",
+      "passwordMatch": "Passwords must match"
+    },
+    "actions": {
+      "save": "Save changes",
+      "reset": "Reset"
+    }
+  },
   "homePage": {
     "page": {
       "homeTitle": "Home Page"
@@ -101,6 +168,307 @@
         "desc": "Stocks, arrivals and write-offs"
       }
     }
+  },
+  "dealCategories": {
+    "title": "Choose a category",
+    "subtitle": "Start by selecting a category to see products available for the deal.",
+    "empty": "No categories found. Add categories in the “Products” section.",
+    "select": "Select",
+    "noImage": "No image",
+    "fallbackName": "Category {{index}}"
+  },
+  "dealProducts": {
+    "subtitle": "Select a product to add to the deal.",
+    "back": "Back to categories",
+    "empty": "No products found in this category.",
+    "noImage": "No image",
+    "noDescription": "No description provided",
+    "inStock": "In stock: {{count}} pcs",
+    "stockUnknown": "Check availability with the manager",
+    "fallbackName": "Product {{index}}",
+    "fallbackCategory": "Category"
+  },
+  "dealForm": {
+    "title": "Deal details",
+    "fields": {
+      "client": {
+        "label": "Client",
+        "placeholder": "Select client"
+      },
+      "counterparty": {
+        "label": "Counterparty",
+        "placeholder": "Select counterparty"
+      },
+      "company": {
+        "label": "Company",
+        "placeholder": "Select company"
+      },
+      "contractNumber": {
+        "label": "Contract number",
+        "placeholder": "№3251"
+      },
+      "plannedShipmentDate": {
+        "label": "Planned shipment date"
+      },
+      "dealAmount": {
+        "label": "Deal amount",
+        "placeholder": "0.00"
+      },
+      "funnel": {
+        "label": "Funnel column",
+        "placeholder": "Select column"
+      },
+      "currency": {
+        "label": "Currency",
+        "placeholder": "Select currency"
+      },
+      "payCard": {
+        "label": "Pay by card",
+        "placeholder": "0.00"
+      },
+      "payCash": {
+        "label": "Pay in cash",
+        "placeholder": "0.00"
+      },
+      "comments": {
+        "label": "Comments",
+        "placeholder": "Enter comments..."
+      },
+      "guarantee": {
+        "label": "Guarantee",
+        "placeholder": "Enter guarantee terms"
+      }
+    },
+    "buttons": {
+      "saving": "Saving...",
+      "submit": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "dealTable": {
+    "headers": {
+      "serial": "Serial №",
+      "name": "Name",
+      "quantity": "Quantity",
+      "price": "Price",
+      "vat": "VAT",
+      "discount": "Discount",
+      "total": "Total"
+    },
+    "empty": "No products yet. Use the buttons below to add items to this deal.",
+    "values": {
+      "percent": "{{value}}%"
+    },
+    "summary": {
+      "items": "Items: {{count}}",
+      "subtotal": "Subtotal: {{amount}}",
+      "vat": "VAT: {{amount}}",
+      "discount": "Discount: {{amount}}"
+    }
+  },
+  "dealAdd": {
+    "errors": {
+      "notFound": "Deal not found.",
+      "load": {
+        "title": "Failed to load deal",
+        "description": "Could not fetch deal data."
+      }
+    },
+    "title": {
+      "create": "Create deal",
+      "edit": "Edit deal"
+    },
+    "description": {
+      "create": "Fill in the deal information and add products.",
+      "edit": "Update the deal details and save your changes."
+    },
+    "defaults": {
+      "draft": "Draft"
+    },
+    "status": {
+      "inProgress": "In progress",
+      "draft": "Draft",
+      "creating": "Creating"
+    },
+    "payment": {
+      "partial": "Partially paid",
+      "unpaid": "Unpaid"
+    },
+    "buttons": {
+      "create": "Create",
+      "save": "Save",
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "deleting": "Deleting...",
+      "deleteDeal": "Delete deal"
+    },
+    "toasts": {
+      "required": {
+        "title": "Missing required fields",
+        "description": "Select a client, counterparty, and company."
+      },
+      "noProducts": {
+        "title": "Add products",
+        "description": "Add at least one product before saving the deal."
+      },
+      "updateSuccess": {
+        "title": "Deal updated",
+        "description": "Contract {{number}} updated successfully."
+      },
+      "createSuccess": {
+        "title": "Deal created",
+        "description": "Contract {{number}} created successfully."
+      },
+      "saveError": {
+        "title": "Could not save",
+        "description": "Try again or contact an administrator."
+      },
+      "deleteSuccess": {
+        "title": "Deal deleted"
+      },
+      "deleteError": {
+        "title": "Could not delete",
+        "description": "Please try again later."
+      },
+      "reset": {
+        "title": "Form cleared",
+        "description": "Deal draft has been reset."
+      }
+    },
+    "actions": {
+      "printSoon": {
+        "title": "Printing available soon",
+        "description": "We're working on printable documents."
+      },
+      "documents": {
+        "title": "Documents not ready",
+        "description": "Document uploads will arrive in a future update."
+      },
+      "tax": {
+        "title": "Tax calculator unavailable",
+        "description": "We'll add tax calculations later."
+      }
+    },
+    "products": {
+      "heading": "Deal products",
+      "add": "Add product",
+      "scan": "Scan barcode"
+    },
+    "dialog": {
+      "delete": {
+        "title": "Delete deal?",
+        "description": "This action cannot be undone."
+      },
+      "cancel": "Cancel",
+      "confirm": "Delete"
+    }
+  },
+  "funnelPage": {
+    "fallbackName": "Column {{index}}",
+    "title": "Sales funnel",
+    "addButton": "Add column",
+    "emptyState": "No funnel columns yet. Create one to organise deals.",
+    "tableHeaders": {
+      "order": "Order",
+      "name": "Name",
+      "color": "Color",
+      "comment": "Comment",
+      "number": "№",
+      "actions": "Actions"
+    },
+    "colorPreview": "Column color",
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "savingOrder": "Saving column order...",
+    "noComment": "No comment",
+    "toasts": {
+      "orderError": {
+        "title": "Failed to save order",
+        "description": "Reload the page and try again."
+      },
+      "invalidOrder": {
+        "title": "Invalid number",
+        "description": "Enter a numeric value greater than zero."
+      },
+      "nameRequired": {
+        "title": "Name is required",
+        "description": "Column name cannot be empty."
+      },
+      "updateSuccess": {
+        "title": "Column updated"
+      },
+      "updateError": {
+        "title": "Could not update column",
+        "description": "Please try again later."
+      },
+      "deleteBlocked": {
+        "title": "Cannot delete column",
+        "description": "There are deals in this column. Move them before deleting."
+      },
+      "deleteSuccess": {
+        "title": "Column deleted"
+      },
+      "deleteError": {
+        "title": "Could not delete column",
+        "description": "Please try again later."
+      }
+    }
+  },
+  "funnelAdd": {
+    "validation": {
+      "name": "Enter a name (at least 2 characters).",
+      "color": "Provide a HEX color value.",
+      "order": "Enter the display order.",
+      "orderMin": "Minimum value is 0."
+    },
+    "toasts": {
+      "success": "Column created",
+      "error": {
+        "title": "Could not create column",
+        "description": "Please try again later."
+      }
+    },
+    "buttons": {
+      "back": "Back",
+      "saving": "Saving...",
+      "submit": "Create column",
+      "cancel": "Cancel"
+    },
+    "title": "New funnel column",
+    "sectionTitle": "Column settings",
+    "fields": {
+      "name": "Name",
+      "color": "Color",
+      "order": "Order",
+      "comment": "Comment"
+    },
+    "placeholders": {
+      "name": "For example, New lead",
+      "color": "#5B6FDD",
+      "order": "0",
+      "comment": "Describe how this column is used"
+    },
+    "colorPicker": "Pick color"
+  },
+  "dealPage": {
+    "loadErrorTitle": "Failed to load deals",
+    "searchPlaceholder": "Search",
+    "openSettings": "Pipeline settings",
+    "newDeal": "New deal",
+    "addDealButton": "Add deal",
+    "emptyColumnHint": "Drag deals into this column",
+    "updating": "Updating...",
+    "unassignedFooter": "No stage · drag deals here to remove them from the pipeline",
+    "noFunnelsHint": "No pipelines found. Add one via the settings button.",
+    "unassignedColumn": "No stage",
+    "columnSummary": "{{dealCount}} · ${{total}}",
+    "dealCount_one": "{{count}} deal",
+    "dealCount_other": "{{count}} deals",
+    "defaultDealName": "Deal"
   },
   "clients": {
     "columns": {
@@ -130,6 +498,24 @@
       "date_create": "Purchase date",
       "date_warranty": "Warranty expires",
       "price": "Amount"
+    }
+  },
+  "products": {
+    "columns": {
+      "id": "#",
+      "image": "Image",
+      "name": "Name",
+      "category": "Category",
+      "warranty": "Warranty",
+      "price": "Price",
+      "createdAt": "Created",
+      "actions": ""
+    },
+    "dialog": {
+      "deleteTitle": "Delete product?",
+      "deleteDesc": "This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Yes, delete"
     }
   },
   "common": {

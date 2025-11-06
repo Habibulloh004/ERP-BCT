@@ -91,7 +91,7 @@ const MultiSelectField = ({ field, props }) => {
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="h-auto p-0 ml-1 hover:bg-transparent"
+                className="h-auto p-0 ml-1 hover:bg-transparent text-primary"
                 onClick={() => {
                   const valueToRemove = props.options.find(opt => opt.label === label)?.value
                   if (valueToRemove) removeValue(valueToRemove)
@@ -178,6 +178,8 @@ const RenderInput = ({ field, className, props, rules }) => {
         <FormControl>
           <Input
             type="number"
+            step={props.step ?? "any"}
+            inputMode={props.inputMode ?? "decimal"}
             placeholder={props.placeholder}
             {...field}
             value={field.value || ""}
@@ -281,7 +283,7 @@ const RenderInput = ({ field, className, props, rules }) => {
             <FormControl>
               <SelectTrigger
                 className={cn(
-                  "h-12 shad-select-trigger border-b-2 border-border",
+                  "h-12 shad-select-trigger border-b-2 border-border text-primary",
                   props.className,
                   className
                 )}
@@ -391,7 +393,7 @@ const CustomFormField = (props) => {
           )}
           <RenderInput
             className={cn(
-              "text-white text-xs lg:text-base bg-transparent",
+              "text-xs lg:text-base bg-transparent",
               inputClass
             )}
             field={field}

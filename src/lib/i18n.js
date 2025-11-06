@@ -69,4 +69,8 @@ i18n.on('languageChanged', (lng) => {
   }
 });
 
+if (typeof document !== "undefined") {
+  document.documentElement.lang = i18n.language || 'ru';
+}
+
 export default i18n;

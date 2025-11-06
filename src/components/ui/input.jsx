@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 
 function Input({
   className,
-  type,
+  type = "text",
   ...props
 }) {
   return (

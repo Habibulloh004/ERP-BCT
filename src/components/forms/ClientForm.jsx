@@ -1,17 +1,19 @@
 "use client"
 
-import React, { useMemo, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useMemo, useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toastError, toastSuccess } from "@/lib/toast"
+import { ArrowLeft, Edit, Save, Trash2 } from "lucide-react"
 
-import CustomFormField, { FormFieldType } from "@/components/shared/customFormField"
-import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Form } from "@/components/ui/form"
-import { ArrowLeft, Save, X, Edit, Trash2 } from 'lucide-react'
-import { toast } from 'sonner'
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,189 +25,151 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { DataTable } from '../shared/DataTable'
-import { getSerialColumns } from '@/lib/columns'
-import { serialData } from '@/lib/data'
-import { toastError, toastLoading, toastSuccess } from '@/lib/toast'
-import { useTranslation } from 'react-i18next'
+import { createClient, updateClient, deleteClient } from "@/lib/actions"
+import { useDealStore } from "@/store/dealStore"
+import { splitFullName } from "@/lib/utils/text"
 
-// Validation schema
+const ClientSchema = z.object({
+  first_name: z.string().min(2, "Имя обязательно"),
+  last_name: z.string().min(2, "Фамилия обязательна"),
+  email: z.string().email("Некорректный email"),
+  phone: z.string().min(9, "Некорректный номер телефона"),
+  company: z.string().min(1, "Название компании обязательно"),
+  company_phone: z.string().optional(),
+  address: z.string().optional(),
+  comment: z.string().optional(),
+})
 
 export default function ClientForm({ type, data = null, clientId = null }) {
   const router = useRouter()
+  const loadReferenceData = useDealStore((state) => state.loadReferenceData)
   const [isLoading, setIsLoading] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const { t } = useTranslation();
 
-  const ClientValidation = z.object({
-  name: z.string().min(2, "Имя обязательно для заполнения").trim(),
-  phone: z.string().min(9, "Некорректный номер телефона").trim(),
-  email: z.string().email("Некорректный email адрес").trim(),
-  orders: z.number().min(0, "Количество заказов не может быть отрицательным"),
-})
+  const isReadonly = type === "show"
+  const isEdit = type === "edit"
+  const isAdd = type === "add"
 
+  const defaultValues = useMemo(() => {
+    const fallbackSource =
+      (typeof data?.name === "string" && data.name) ||
+      (typeof data?.full_name === "string" && data.full_name) ||
+      (typeof data?.fullName === "string" && data.fullName) ||
+      ""
+    const derived = splitFullName(fallbackSource)
 
-  const columns = useMemo(() => getSerialColumns(t), [t]);
-
-  // Form setup
-  const form = useForm({
-    resolver: zodResolver(ClientValidation),
-    defaultValues: {
-      name: data?.name || "",
-      phone: data?.phone || "",
+    return {
+      first_name:
+        data?.first_name ||
+        data?.firstname ||
+        data?.firstName ||
+        derived.first,
+      last_name:
+        data?.last_name ||
+        data?.lastname ||
+        data?.lastName ||
+        derived.last,
       email: data?.email || "",
-      orders: data?.orders || 0,
-    },
+      phone: data?.phone || "",
+      company: data?.company || "",
+      company_phone: data?.company_phone || data?.phone_company || "",
+      address: data?.address || "",
+      comment: data?.comment || "",
+    }
+  }, [data])
+
+  const form = useForm({
+    resolver: zodResolver(ClientSchema),
+    defaultValues,
     mode: "onSubmit",
   })
 
-  // Determine if fields should be readonly
-  const isReadonly = type === 'show'
-  const isEdit = type === 'edit'
-  const isAdd = type === 'add'
+  const pageTitle = isAdd ? "Новый клиент" : isEdit ? "Редактирование клиента" : "Информация о клиенте"
 
-  // Page titles
-  const getPageTitle = () => {
-    switch (type) {
-      case 'add': return 'Новый клиент'
-      case 'edit': return 'Азиз'
-      case 'show': return 'Азиз'
-      default: return 'Клиент'
-    }
-  }
-
-  // Submit handler
-
-  const onSubmit = async (values) => {
-    const id = toastLoading({
-      title: "Сохранение...",
-      description: "Пожалуйста, подождите"
-    });
-
+  const handleSubmit = async (values) => {
     if (isReadonly) return
 
     setIsLoading(true)
     try {
-      console.log(`${type} клиента:`, values)
-
-      if (isAdd) {
-        // API call for add
-        // const response = await fetch('/api/clients', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(values)
-        // })
-        await new Promise((r) => setTimeout(r, 1500));
-        toast.dismiss(id);
-        toastSuccess({
-          title: "Успех!",
-          description: "Новая запись успешно добавлена!"
-        });
-      } else if (isEdit) {
-        // API call for edit
-        // const response = await fetch(`/api/clients/${clientId}`, {
-        //   method: 'PUT',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(values)
-        // })
-        toast.dismiss(id);
-        toastError({
-          title: "Ошибка",
-          description: "Не удалось сохранить изменения"
-        });
+      if (isEdit && clientId) {
+        await updateClient(clientId, values)
+        toastSuccess({ title: "Клиент обновлён" })
+      } else {
+        await createClient(values)
+        toastSuccess({ title: "Клиент создан" })
       }
-      await new Promise(resolve => setTimeout(resolve, 1000))
 
-      router.push('/dashboard/clients')
+      await loadReferenceData(true)
+      router.push("/dashboard/clients")
     } catch (error) {
-      console.error('Ошибка:', error)
-      toast.error(`Произошла ошибка при ${isAdd ? 'добавлении' : 'обновлении'} клиента`)
+      console.error("Client save error:", error)
+      toastError({
+        title: "Не удалось сохранить клиента",
+        description: error?.message,
+      })
     } finally {
       setIsLoading(false)
     }
   }
 
-  // Delete handler
   const handleDelete = async () => {
-    setIsDeleting(true)
+    if (!clientId) return
+    setIsLoading(true)
     try {
-      console.log('Удаление клиента:', clientId)
-
-      // API call for delete
-      // const response = await fetch(`/api/clients/${clientId}`, {
-      //   method: 'DELETE'
-      // })
-
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      toast.success('Клиент успешно удален!')
-      router.push('/dashboard/clients')
+      await deleteClient(clientId)
+      toastSuccess({ title: "Клиент удалён" })
+      await loadReferenceData(true)
+      router.push("/dashboard/clients")
     } catch (error) {
-      console.error('Ошибка:', error)
-      toast.error('Произошла ошибка при удалении клиента')
+      console.error("Client delete error:", error)
+      toastError({
+        title: "Не удалось удалить клиента",
+        description: error?.message,
+      })
     } finally {
-      setIsDeleting(false)
+      setIsLoading(false)
     }
   }
 
-  // Navigation handlers
-  const handleEdit = () => {
-    router.push(`/dashboard/clients/${clientId}?type=edit`)
-  }
-
-  const handleCancel = () => {
-    router.push('/dashboard/clients')
-  }
-
   return (
-    <div className="space-y-6">
-      {/* Header */}
+    <div className="mx-auto w-11/12 max-w-4xl py-6 space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => router.back()}
-          >
-            <ArrowLeft className="h-4 w-4" />
+          <Button variant="ghost" size="icon" onClick={() => router.back()}>
+            <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-2xl font-bold">{getPageTitle()}</h1>
+          <div>
+            <h1 className="text-3xl font-bold">{pageTitle}</h1>
+            {clientId && !isAdd && (
+              <p className="text-sm text-muted-foreground">ID клиента: {clientId}</p>
+            )}
+          </div>
         </div>
 
-        {/* Action buttons for show mode */}
-        {isReadonly && (
+        {isReadonly && clientId && (
           <div className="flex gap-2">
-            <Button
-              variant="outline"
-              onClick={handleEdit}
-            >
-              <Edit className="h-4 w-4 mr-2" />
-              Редактировать
-            </Button>
-
+            <Link href={`/dashboard/clients/${clientId}?type=edit`}>
+              <Button variant="outline" className="gap-2">
+                <Edit className="h-4 w-4" />
+                Редактировать
+              </Button>
+            </Link>
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="destructive">
-                  <Trash2 className="h-4 w-4 mr-2" />
+                <Button variant="destructive" className="gap-2">
+                  <Trash2 className="h-4 w-4" />
                   Удалить
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Подтвердить удаление?</AlertDialogTitle>
+                  <AlertDialogTitle>Удалить клиента?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    Вы действительно хотите удалить клиента "{data?.name}"?
-                    Это действие нельзя будет отменить.
+                    Это действие нельзя отменить. Клиент будет удалён вместе с историей.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Отмена</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={handleDelete}
-                    disabled={isDeleting}
-                    className="bg-red-500 hover:bg-red-600"
-                  >
-                    {isDeleting ? 'Удаление...' : 'Да, удалить'}
-                  </AlertDialogAction>
+                  <AlertDialogAction onClick={handleDelete}>Удалить</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -213,83 +177,143 @@ export default function ClientForm({ type, data = null, clientId = null }) {
         )}
       </div>
 
-      {/* Form Card */}
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <div className="flex flex-col bg-white p-4 rounded-md gap-4">
-            {/* Имя */}
-            <CustomFormField
-              fieldType={FormFieldType.INPUT}
-              control={form.control}
-              name="name"
-              label="Имя Фамилия"
-              placeholder="Введите имя и фамилию"
-              disabled={isReadonly}
-              required={true}
-              inputClass={`h-11 text-black rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
-            />
+      <Card className="bg-white shadow-sm">
+        <CardHeader>
+          <CardTitle>Основная информация</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="first_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Имя</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Введите имя" disabled={isReadonly} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            {/* Телефон */}
-            <CustomFormField
-              fieldType={FormFieldType.PHONE_INPUT}
-              control={form.control}
-              name="phone"
-              label="Номер телефона"
-              placeholder="+998 99 999-99-99"
-              disabled={isReadonly}
-              required={true}
-              inputClass={`text-black rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
-            />
+              <FormField
+                control={form.control}
+                name="last_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Фамилия</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Введите фамилию" disabled={isReadonly} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            {/* Email */}
-            <CustomFormField
-              fieldType={FormFieldType.INPUT}
-              control={form.control}
-              name="email"
-              label="Email"
-              placeholder="example@gmail.com"
-              disabled={isReadonly}
-              required={true}
-              inputClass={`h-11 text-black rounded-md border ${isReadonly ? 'bg-gray-50' : ''}`}
-            />
-          </div>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="name@example.com" disabled={isReadonly} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Status info for show mode */}
-          {isReadonly && data && (
-            <div className="border-t pt-6 mt-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">История покупок</h3>
-              <DataTable columns={columns} allData={serialData} />
-            </div>
-          )}
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Телефон</FormLabel>
+                    <FormControl>
+                      <Input placeholder="+998" disabled={isReadonly} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Buttons - only show for add/edit modes */}
-          {!isReadonly && (
-            <div className="flex justify-end gap-3 pt-6">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleCancel}
-                disabled={isLoading}
-              >
-                <X className="h-4 w-4 mr-2" />
-                Отмена
-              </Button>
-              <Button
-                type="submit"
-                disabled={isLoading}
-              >
-                <Save className="h-4 w-4 mr-2" />
-                {isLoading
-                  ? 'Сохранение...'
-                  : isAdd
-                    ? 'Сохранить'
-                    : 'Сохранить изменения'
-                }
-              </Button>
-            </div>
-          )}
-        </form>
-      </Form>
+              <FormField
+                control={form.control}
+                name="company"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Компания</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Введите название компании" disabled={isReadonly} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="company_phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Телефон компании</FormLabel>
+                    <FormControl>
+                      <Input placeholder="+998" disabled={isReadonly} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem className="md:col-span-2">
+                    <FormLabel>Адрес</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Введите адрес" disabled={isReadonly} {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="comment"
+                render={({ field }) => (
+                  <FormItem className="md:col-span-2">
+                    <FormLabel>Комментарий</FormLabel>
+                    <FormControl>
+                      <Textarea rows={4} placeholder="Дополнительная информация" disabled={isReadonly} {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              {!isReadonly && (
+                <div className="md:col-span-2 flex justify-end gap-3">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => router.push("/dashboard/clients")}
+                    disabled={isLoading}
+                  >
+                    Отмена
+                  </Button>
+                  <Button type="submit" className="gap-2" disabled={isLoading}>
+                    <Save className="h-4 w-4" />
+                    {isEdit ? "Сохранить" : "Добавить"}
+                  </Button>
+                </div>
+              )}
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </div>
   )
 }

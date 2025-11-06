@@ -139,6 +139,11 @@ export function AuthProvider({
   const clearAuth = useCallback(() => {
     setUser(null);
     setTokens({ accessToken: null, refreshToken: null });
+    if (typeof document !== "undefined") {
+      document.cookie = "authData=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      document.cookie = "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
     router.refresh();
   }, [router]);
 

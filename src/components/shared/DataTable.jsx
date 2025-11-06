@@ -43,55 +43,82 @@ import {
 } from "@/components/ui/pagination"
 import { cn } from "@/lib/utils"
 
-export function DataTable({ columns, allData, defaultItemsPerPage = 10 }) {
+export function DataTable({
+  columns,
+  allData,
+  defaultItemsPerPage = 10,
+  totalData,
+  serverSide = false, // Flag for server-side pagination
+  onPageChange, // Callback for page change (server-side)
+  onLimitChange, // Callback for limit change (server-side)
+}) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
   const [columnVisibility, setColumnVisibility] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
-  const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage)
 
-  // Query parametrlardan faqat page ni olish
+  // Get page and limit from URL
   const currentPage = parseInt(searchParams.get('page') || '1')
+  const itemsPerPage = parseInt(searchParams.get('limit') || defaultItemsPerPage.toString())
 
-  // Filterlangan ma'lumotlar
+  // Server-side pagination: use API data directly
+  // Client-side pagination: filter and slice locally
   const filteredData = useMemo(() => {
+    if (serverSide) return allData // Use data from API as-is
+
     if (!globalFilter) return allData
 
     return allData.filter(item => {
       return Object.values(item).some(value =>
-        value.toString().toLowerCase().includes(globalFilter.toLowerCase())
+        value?.toString().toLowerCase().includes(globalFilter.toLowerCase())
       )
     })
-  }, [allData, globalFilter])
+  }, [allData, globalFilter, serverSide])
 
-  // Sahifalangan ma'lumotlar
+  // For client-side, paginate locally
   const paginatedData = useMemo(() => {
+    if (serverSide) return allData // Already paginated by API
+
     const startIndex = (currentPage - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
     return filteredData.slice(startIndex, endIndex)
-  }, [filteredData, currentPage, itemsPerPage])
+  }, [filteredData, currentPage, itemsPerPage, serverSide, allData])
 
-  // Umumiy sahifalar sonini hisoblash
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage)
+  // Calculate total pages
+  const totalPages = serverSide
+    ? Math.ceil((totalData || 0) / itemsPerPage)
+    : Math.ceil(filteredData.length / itemsPerPage)
 
-  // Sahifa o'zgarganda URL ni yangilash
+  // Handle page change
   const handlePageChange = (page) => {
     const params = new URLSearchParams(searchParams)
     params.set('page', page.toString())
-    router.push(`?${params.toString()}`)
+    params.set('limit', itemsPerPage.toString())
+
+    router.push(`?${params.toString()}`, { scroll: false })
+
+    // Call parent callback for server-side pagination
+    if (serverSide && onPageChange) {
+      onPageChange(page, itemsPerPage)
+    }
   }
 
-  // Limit o'zgarganda
+  // Handle limit change
   const handleLimitChange = (newLimit) => {
-    setItemsPerPage(parseInt(newLimit))
-    // Sahifani 1 ga qaytarish
     const params = new URLSearchParams(searchParams)
-    params.set('page', '1')
-    router.push(`?${params.toString()}`)
+    params.set('page', '1') // Reset to page 1
+    params.set('limit', newLimit.toString())
+
+    router.push(`?${params.toString()}`, { scroll: false })
+
+    // Call parent callback for server-side pagination
+    if (serverSide && onLimitChange) {
+      onLimitChange(parseInt(newLimit))
+    }
   }
 
-  // Sahifa limiti oshib ketganda 1-sahifaga qaytarish
+  // Redirect to page 1 if current page exceeds total pages
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
       handlePageChange(1)
@@ -140,20 +167,24 @@ export function DataTable({ columns, allData, defaultItemsPerPage = 10 }) {
     pageCount: totalPages,
   })
 
-  // Ma'lumotlar oralig'ini hisoblash
-  const startItem = filteredData.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0
-  const endItem = Math.min(currentPage * itemsPerPage, filteredData.length)
+  // Calculate data range for display
+  const dataCount = serverSide ? (totalData || 0) : filteredData.length
+  const startItem = dataCount > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0
+  const endItem = Math.min(currentPage * itemsPerPage, dataCount)
 
   return (
     <div className="bg-white p-2 rounded-md space-y-4">
       {/* 🔍 Search va Filter */}
       <div className="flex items-center justify-between">
-        <Input
-          placeholder="Поиск..."
-          value={globalFilter ?? ""}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          className="max-w-sm h-11"
-        />
+        {/* Show search only for client-side pagination */}
+        {!serverSide && (
+          <Input
+            placeholder="Поиск..."
+            value={globalFilter ?? ""}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            className="max-w-sm h-11"
+          />
+        )}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className={"h-11"} variant="outline">Выбрать столбцы</Button>
@@ -306,17 +337,19 @@ export function DataTable({ columns, allData, defaultItemsPerPage = 10 }) {
         )}
         {/* Chap tomon - ma'lumotlar va limit selector */}
         <div className="flex items-center space-x-4">
-          {/* Ma'lumotlar oralig'i */}
+          {/* Data range display */}
           <div className="text-sm text-muted-foreground">
-            {filteredData.length > 0 ? (
-              `${startItem}-${endItem} из ${filteredData.length}`
+            {dataCount > 0 ? (
+              <>
+                Показано {startItem}-{endItem} из {serverSide ? totalData : dataCount}
+                {!serverSide && globalFilter && (
+                  <span className="ml-1">
+                    (отфильтровано из {allData.length})
+                  </span>
+                )}
+              </>
             ) : (
               'Нет данных'
-            )}
-            {globalFilter && (
-              <span className="ml-1">
-                (отфильтровано из {allData.length})
-              </span>
             )}
           </div>
 
@@ -330,9 +363,8 @@ export function DataTable({ columns, allData, defaultItemsPerPage = 10 }) {
               <SelectContent>
                 <SelectItem value="10">10</SelectItem>
                 <SelectItem value="20">20</SelectItem>
-                <SelectItem value="30">30</SelectItem>
-                <SelectItem value="40">40</SelectItem>
                 <SelectItem value="50">50</SelectItem>
+                <SelectItem value="100">100</SelectItem>
               </SelectContent>
             </Select>
           </div>

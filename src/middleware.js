@@ -2,30 +2,31 @@ import { NextResponse } from "next/server";
 
 export function middleware(req) {
   const { pathname } = req.nextUrl;
-  
-  console.log("Middleware ishlamoqda:", pathname);
 
+  // Skip middleware for static files and API routes
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname === "/favicon.ico" ||
     pathname.startsWith("/static") ||
+    pathname.startsWith("/uploads") ||
     pathname.match(/\.(png|jpg|jpeg|gif|svg|webp|ico|css|js|map|woff|woff2|ttf|eot)$/i)
   ) {
     return NextResponse.next();
   }
 
+  // Allow access to dashboard routes - AuthGate will handle authentication UI
   if (pathname === "/dashboard" || pathname.startsWith("/dashboard/")) {
     return NextResponse.next();
   }
 
+  // Redirect root to dashboard
   if (pathname === "/") {
-    const dashboardUrl = new URL("/dashboard", req.url);
-    return NextResponse.redirect(dashboardUrl);
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
-  console.log("Redirecting to dashboard:", pathname);
-  const dashboardUrl = new URL("/dashboard", req.url);
-  return NextResponse.redirect(dashboardUrl);
+
+  // Default: allow all other routes
+  return NextResponse.next();
 }
 
 export const config = {

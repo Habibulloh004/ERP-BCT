@@ -1,9 +1,5 @@
-import React from 'react'
-import ProductsDataList from '../../_components/ProductsDataList'
+import { redirect } from "next/navigation"
 
-export default async function CategoryItemPage({ params }) {
-  const { categoryId } = await params;
-  return (
-    <ProductsDataList />
-  )
+export default function LegacyDealCategoryItemPage() {
+  redirect("/dashboard/deals/add")
 }

@@ -8,6 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
 import { Button } from '@/components/ui/button'
 import { BellRing, Settings, LogOut } from 'lucide-react'
@@ -42,6 +45,8 @@ export default function MenuDialog({ navLinks, isActiveLink }) {
 
   const handleLogOut = () => {
     Cookies.remove("authData");
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
     clearAuth()
   }
 
@@ -58,24 +63,65 @@ export default function MenuDialog({ navLinks, isActiveLink }) {
           
           {/* Navigation Links - faqat xl dan kichik ekranlarda */}
           <div className="xl:hidden">
-            {navLinks?.map((nv, idx) => (
-              <DropdownMenuItem key={idx} asChild>
-                <Link 
-                  href={nv?.link}
-                  className={cn(
-                    "h-12 w-full flex justify-start items-center gap-3 transition-all duration-200",
-                    isActiveLink(nv?.link) 
-                      ? "bg-secondary/20 border-l-4 border-secondary" 
-                      : "bg-[#F8F9FA] hover:bg-secondary/10"
-                  )}
-                >
-                  <div className='w-10 h-10 flex justify-center items-center bg-secondary rounded-md'>
-                    <Image src={nv?.icon} alt={nv?.name} width={24} height={24} />
-                  </div>
-                  <h1 className='text-lg font-medium'>{nv?.name}</h1>
-                </Link>
-              </DropdownMenuItem>
-            ))}
+            {navLinks?.map((nv, idx) => {
+              if (nv.children) {
+                const groupActive = nv.children.some((child) => isActiveLink(child.link))
+                return (
+                  <DropdownMenuSub key={idx}>
+                    <DropdownMenuSubTrigger
+                      className={cn(
+                        "h-12 w-full flex justify-start items-center gap-3 transition-all duration-200 bg-[#F8F9FA]",
+                        groupActive ? "bg-secondary/20 border-l-4 border-secondary" : ""
+                      )}
+                    >
+                      <div className='w-10 h-10 flex justify-center items-center bg-secondary rounded-md'>
+                        <Image src={nv?.icon} alt={nv?.name} width={24} height={24} />
+                      </div>
+                      <h1 className='text-lg font-medium'>{nv?.name}</h1>
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuSubContent className="min-w-[260px] space-y-1">
+                      {nv.children.map((child, childIdx) => (
+                        <DropdownMenuItem key={childIdx} asChild>
+                          <Link
+                            href={child.link}
+                            className={cn(
+                              "h-10 w-full flex items-center gap-3 rounded-md px-2 transition-colors",
+                              isActiveLink(child.link)
+                                ? "bg-secondary/20 text-secondary-foreground"
+                                : "hover:bg-secondary/10"
+                            )}
+                          >
+                            <div className='w-8 h-8 flex justify-center items-center bg-secondary/80 rounded-md'>
+                              <Image src={child.icon} alt={child.name} width={20} height={20} />
+                            </div>
+                            <span className='text-sm font-medium'>{child.name}</span>
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuSubContent>
+                  </DropdownMenuSub>
+                )
+              }
+
+              return (
+                <DropdownMenuItem key={idx} asChild>
+                  <Link 
+                    href={nv?.link}
+                    className={cn(
+                      "h-12 w-full flex justify-start items-center gap-3 transition-all duration-200",
+                      isActiveLink(nv?.link) 
+                        ? "bg-secondary/20 border-l-4 border-secondary" 
+                        : "bg-[#F8F9FA] hover:bg-secondary/10"
+                    )}
+                  >
+                    <div className='w-10 h-10 flex justify-center items-center bg-secondary rounded-md'>
+                      <Image src={nv?.icon} alt={nv?.name} width={24} height={24} />
+                    </div>
+                    <h1 className='text-lg font-medium'>{nv?.name}</h1>
+                  </Link>
+                </DropdownMenuItem>
+              )
+            })}
             <DropdownMenuSeparator className="my-2" />
           </div>
 
