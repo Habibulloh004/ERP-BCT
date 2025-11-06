@@ -1,4 +1,4 @@
-import apiClient, { API_BASE_ORIGIN } from './api-client'
+import apiClient, { API_BASE_ORIGIN, API_BASE_URL } from './api-client'
 
 /**
  * Product API Services
@@ -315,7 +315,18 @@ export const fileService = {
   },
 }
 
-const ADMIN_BASE_ORIGIN = API_BASE_ORIGIN.replace(/\/api$/, "")
+const ADMIN_BASE_URL =
+  (API_BASE_URL || "").replace(/\/$/, "") ||
+  `${API_BASE_ORIGIN.replace(/\/$/, "")}/api`
+
+const resolveAdminPath = (path = "") => {
+  const normalized = typeof path === "string" ? path.trim() : ""
+  if (!normalized) return "admin"
+  const withoutLeadingSlash = normalized.startsWith("/") ? normalized.slice(1) : normalized
+  return withoutLeadingSlash.startsWith("admin")
+    ? withoutLeadingSlash
+    : `admin/${withoutLeadingSlash}`
+}
 
 const adminFetch = async (path, { token, method = "GET", body } = {}) => {
   const headers = {
@@ -325,10 +336,15 @@ const adminFetch = async (path, { token, method = "GET", body } = {}) => {
     headers.Authorization = `Bearer ${token}`
   }
 
-  const response = await fetch(`${ADMIN_BASE_ORIGIN}${path}`, {
+  const isBrowser = typeof window !== "undefined"
+  const adminPath = resolveAdminPath(path)
+  const fetchUrl = isBrowser ? `/api/${adminPath}` : `${ADMIN_BASE_URL}/${adminPath}`
+
+  const response = await fetch(fetchUrl, {
     method,
     headers,
     credentials: "include",
+    cache: "no-store",
     body: body ? JSON.stringify(body) : undefined,
   })
 

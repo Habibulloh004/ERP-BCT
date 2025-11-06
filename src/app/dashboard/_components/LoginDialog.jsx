@@ -33,16 +33,16 @@ export default function LoginDialog() {
   const [openR, setOpenR] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const LoginValidation = useMemo(() => z.object({
-    phone: z
+    name: z
       .string()
-      .min(3, t("login.error.phone"))
-      .trim(),
-    password: z.string().min(6, t("login.error.password")),
+      .trim()
+      .min(3, t("login.error.name", { defaultValue: t("login.error.phone") })),
+    password: z.string().min(1, t("login.error.password")),
   }), [t])
 
   const form = useForm({
     resolver: zodResolver(LoginValidation),
-    defaultValues: { phone: "", password: "" },
+    defaultValues: { name: "", password: "" },
     mode: "onSubmit",
   });
 
@@ -60,7 +60,7 @@ export default function LoginDialog() {
 
     try {
       const payload = {
-        name: values.phone.trim(),
+        name: values.name.trim(),
         password: values.password,
       }
       const result = await adminService.login(payload)
@@ -119,11 +119,11 @@ export default function LoginDialog() {
             >
               <div className="flex flex-col gap-3">
                 <CustomFormField
-                  fieldType={FormFieldType.PHONE_INPUT} // sizning componentingiz
+                  fieldType={FormFieldType.INPUT}
                   control={form.control}
-                  name="phone"
-                  label={t("login.form.label.phone")}
-                  placeholder=""
+                  name="name"
+                  label={t("login.form.label.name", { defaultValue: "Логин" })}
+                  placeholder={t("login.form.placeholder.name", { defaultValue: "" })}
                   inputClass="rounded-md border"
                 />
 
