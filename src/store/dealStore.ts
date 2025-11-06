@@ -516,11 +516,17 @@ export const useDealStore = create<DealStore>((set, get) => ({
           const id = resolveId(record) || `${index + 1}`
           const name = typeof record.name === "string" ? record.name : `Column ${index + 1}`
           const color = typeof record.color === "string" ? record.color : "#5B6FDD"
-          const comment = typeof record.comment === "string" ? record.comment : undefined
-          const order = Number(record.order ?? index)
-          return { id, name, color, comment, order }
+          const funnel: FunnelOption = { id, name, color }
+          if (typeof record.comment === "string") {
+            funnel.comment = record.comment
+          }
+          const orderValue = Number(record.order ?? index)
+          if (!Number.isNaN(orderValue)) {
+            funnel.order = orderValue
+          }
+          return funnel
         })
-        .filter((item): item is FunnelOption => Boolean(item?.id))
+        .filter((item): item is FunnelOption => Boolean(item))
         .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
 
       set({

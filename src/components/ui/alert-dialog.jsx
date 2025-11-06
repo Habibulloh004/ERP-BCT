@@ -24,10 +24,13 @@ function AlertDialogPortal({
   return (<AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />);
 }
 
+/**
+ * @param {React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>} [props]
+ */
 function AlertDialogOverlay({
   className,
   ...props
-}) {
+} = {}) {
   return (
     <AlertDialogPrimitive.Overlay
       data-slot="alert-dialog-overlay"
@@ -39,10 +42,13 @@ function AlertDialogOverlay({
   );
 }
 
+/**
+ * @param {React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>} [props]
+ */
 function AlertDialogContent({
   className,
   ...props
-}) {
+} = {}) {
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay />
@@ -57,10 +63,13 @@ function AlertDialogContent({
   );
 }
 
+/**
+ * @param {React.HTMLAttributes<HTMLDivElement>} [props]
+ */
 function AlertDialogHeader({
   className,
   ...props
-}) {
+} = {}) {
   return (
     <div
       data-slot="alert-dialog-header"
@@ -69,10 +78,13 @@ function AlertDialogHeader({
   );
 }
 
+/**
+ * @param {React.HTMLAttributes<HTMLDivElement>} [props]
+ */
 function AlertDialogFooter({
   className,
   ...props
-}) {
+} = {}) {
   return (
     <div
       data-slot="alert-dialog-footer"
@@ -81,10 +93,13 @@ function AlertDialogFooter({
   );
 }
 
+/**
+ * @param {React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>} [props]
+ */
 function AlertDialogTitle({
   className,
   ...props
-}) {
+} = {}) {
   return (
     <AlertDialogPrimitive.Title
       data-slot="alert-dialog-title"
@@ -93,10 +108,13 @@ function AlertDialogTitle({
   );
 }
 
+/**
+ * @param {React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>} [props]
+ */
 function AlertDialogDescription({
   className,
   ...props
-}) {
+} = {}) {
   return (
     <AlertDialogPrimitive.Description
       data-slot="alert-dialog-description"
@@ -105,17 +123,23 @@ function AlertDialogDescription({
   );
 }
 
+/**
+ * @param {React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>} [props]
+ */
 function AlertDialogAction({
   className,
   ...props
-}) {
+} = {}) {
   return (<AlertDialogPrimitive.Action className={cn(buttonVariants(), className)} {...props} />);
 }
 
+/**
+ * @param {React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>} [props]
+ */
 function AlertDialogCancel({
   className,
   ...props
-}) {
+} = {}) {
   return (
     <AlertDialogPrimitive.Cancel
       className={cn(buttonVariants({ variant: "outline" }), className)}
